@@ -20,6 +20,12 @@ window.Vue = require('vue').default;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('infocomponent', require('./components/InfoComponent.vue').default);
+Vue.component('consolecomponent', require('./components/ConsoleComponent.vue').default);
+Vue.component('clockcomponent', require('./components/ClockComponent.vue').default);
+Vue.component('ipcomponent', require('./components/IpComponent.vue').default);
+Vue.component('keyboardcomponent', require('./components/KeyboardComponent.vue').default);
+Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

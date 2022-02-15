@@ -14,9 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Auth::routes();
 
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/commands', [App\Http\Controllers\CommandController::class, 'index'])->name('commands');
+
+//apis
+Route::get('get_resources',['App\Http\Controllers\ApiController', 'get_resources'])->name('get_resources');
