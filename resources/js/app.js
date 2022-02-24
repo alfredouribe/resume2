@@ -26,6 +26,7 @@ Vue.component('clockcomponent', require('./components/ClockComponent.vue').defau
 Vue.component('ipcomponent', require('./components/IpComponent.vue').default);
 Vue.component('keyboardcomponent', require('./components/KeyboardComponent.vue').default);
 Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
+Vue.component('commandscomponent', require('./components/CommandsComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

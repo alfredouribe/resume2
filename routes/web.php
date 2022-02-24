@@ -25,3 +25,4 @@ Route::get('/commands', [App\Http\Controllers\CommandController::class, 'index']
 
 //apis
 Route::get('get_resources',['App\Http\Controllers\ApiController', 'get_resources'])->name('get_resources');
+Route::post('add_command',['App\Http\Controllers\ApiController', 'add_command'])->name('add_command');

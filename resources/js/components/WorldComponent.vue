@@ -15,22 +15,25 @@
       return {
         datacollection: null,
         dataResources: [],
+        increment: 1,
       }
     },
     mounted () {
       
     },
     created (){
-      setInterval(() => this.fillData(), 100);
+      setInterval(() => this.fillData(), 1000);
+      
     },
     methods: {
       fillData () {
+          this.increment = this.increment + 1;
           // axios.get('api/get_resources')
           // .then(res =>{
           //     this.dataResources.push(res.data);
           // });
         this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
+          labels: [this.increment, (this.increment + 1), (this.increment + 2), (this.increment + 3)],
           datasets: [
             {
               label: 'CPU',

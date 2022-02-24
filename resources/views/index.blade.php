@@ -29,8 +29,9 @@
                 <ipcomponent ip="<?= $_SERVER['REMOTE_ADDR'] ?>"></ipcomponent>
             </div>
 
-            <div >
-                <worldcomponent></worldcomponent> 
+            <div class="text-center">
+                <worldcomponent></worldcomponent>
+                <small>this is not real information</small>
             </div>
         </div>
 
