@@ -27,6 +27,7 @@ Vue.component('ipcomponent', require('./components/IpComponent.vue').default);
 Vue.component('keyboardcomponent', require('./components/KeyboardComponent.vue').default);
 Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
 Vue.component('commandscomponent', require('./components/CommandsComponent.vue').default);
+Vue.component('gamecomponent', require('./components/GameComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -36,4 +37,10 @@ Vue.component('commandscomponent', require('./components/CommandsComponent.vue')
 
 const app = new Vue({
     el: '#app',
+    delimiters: ['{%', '%}'],
+    data(){
+        return{
+            consola: false
+        }
+    }
 });

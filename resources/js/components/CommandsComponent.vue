@@ -96,6 +96,8 @@
                 .then(res => {
                     this.listCommands.push(res.data)
                 })
+
+                this.command = {};
             },
             deleteCommand(item, index){
                 const parameters = {

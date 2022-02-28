@@ -20,4 +20,8 @@ mix.js('resources/js/app.js', 'public/js')
         'node_modules/@fortawesome/fontawesome-free/webfonts',
         'public/webfonts'
     )
-    .css('resources/css/main.css', 'public/css/main.css');
+    .css('resources/css/main.css', 'public/css/main.css')
+    .js('resources/js/init.js', 'public/js/init.js')
+    .js('resources/js/Overworld.js', 'public/js/Overworld.js')
+    .copy('resources/images/maps/', 'public/images/maps/')
+    .copy('resources/images/heroes/', 'public/images/heroes/');

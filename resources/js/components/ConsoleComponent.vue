@@ -39,6 +39,8 @@
 
                 if(this.newCommand.command == "clear"){
                     this.commands = []
+                }else if(this.newCommand.command == "game"){
+                    this.$root.consola = false;
                 }else{
                     axios.post('api/process_command', parameters)
                     .then(res => {

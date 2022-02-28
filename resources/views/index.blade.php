@@ -16,7 +16,8 @@
 
         <div class="col-md-8 col-sm-12">
             <div class="consoleSection">
-                <consolecomponent></consolecomponent>
+                <consolecomponent v-if="consola == true"></consolecomponent>
+                <gamecomponent v-if="consola == false"></gamecomponent>
             </div>
         </div>
 

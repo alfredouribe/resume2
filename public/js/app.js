@@ -5424,6 +5424,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/add_command', parameters).then(function (res) {
         _this.listCommands.push(res.data);
       });
+      this.command = {};
     },
     deleteCommand: function deleteCommand(item, index) {
       var _this2 = this;
@@ -5522,6 +5523,8 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.newCommand.command == "clear") {
         this.commands = [];
+      } else if (this.newCommand.command == "game") {
+        this.$root.consola = false;
       } else {
         axios.post('api/process_command', parameters).then(function (res) {
           _this.commands.push(res.data);
@@ -5567,6 +5570,156 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {}
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      c: "",
+      ctx: "",
+      vueCanvas: "",
+      x: 2,
+      y: 1,
+      heroShowCutWidth: 32,
+      heroShowCutHeight: 32,
+      heroShowCoorImageX: 0,
+      heroShowCoorImageY: 0,
+      hero: null
+    };
+  },
+  mounted: function mounted() {
+    this.c = document.getElementById("c");
+    this.ctx = this.c.getContext("2d");
+    this.vueCanvas = this.ctx;
+    document.addEventListener("keydown", this.keyDown1);
+    document.addEventListener("keyup", this.keyUp1);
+  },
+  methods: {
+    init: function init() {
+      var _this = this;
+
+      var image = new window.Image();
+      image.src = "/images/maps/scene0.gif";
+
+      image.onload = function () {
+        _this.ctx.drawImage(image, 0, 0);
+      };
+
+      var npc = new Image();
+      npc.src = "/images/heroes/npc1.png";
+
+      npc.onload = function () {
+        _this.ctx.drawImage(npc, 0, //left cut 
+        0, //top cut
+        32, //width of cut
+        32, //height of cut
+        14 * 16, //x position
+        1 * 16, //y position
+        48, //size in x
+        48 //size in y
+        );
+      };
+
+      this.heroMovement();
+    },
+    keyDown1: function keyDown1(e) {
+      var k = event.code;
+
+      if (e.key == "ArrowLeft") {
+        if (this.x - 1 > -2) {
+          this.x = this.x - 1;
+        } else {
+          this.x = -1;
+        }
+
+        this.heroShowCoorImageX;
+        this.heroShowCoorImageY = 32 * 3;
+      }
+
+      if (e.key == "ArrowRight") {
+        if (this.x + 1 < 17) {
+          this.x = this.x + 1;
+        } else {
+          this.x = 16;
+        }
+
+        this.x = this.x + 1;
+        this.heroShowCoorImageX;
+        this.heroShowCoorImageY = 32 * 1;
+      }
+
+      if (e.key == "ArrowUp") {
+        if (this.y - 1 > -3) {
+          this.y = this.y - 1;
+        } else {
+          this.y = -2;
+        }
+
+        this.heroShowCoorImageX;
+        this.heroShowCoorImageY = 32 * 2;
+      }
+
+      if (e.key == "ArrowDown") {
+        if (this.y + 1 <= 7) {
+          this.y = this.y + 1;
+        } else {
+          this.y = 7;
+        } //this.y = this.y+1;
+
+
+        this.heroShowCoorImageX;
+        this.heroShowCoorImageY = 32 * 0;
+      }
+
+      if (e.key == "Escape") {
+        this.$root.consola = true;
+      }
+
+      this.init();
+    },
+    keyUp1: function keyUp1(e) {},
+    heroMovement: function heroMovement() {
+      var _this2 = this;
+
+      this.hero = new Image();
+      this.hero.src = "/images/heroes/erio.png";
+
+      this.hero.onload = function () {
+        _this2.ctx.drawImage(_this2.hero, _this2.heroShowCoorImageX, //left cut 
+        _this2.heroShowCoorImageY, //top cut
+        _this2.heroShowCutWidth, //width of cut
+        _this2.heroShowCutHeight, //height of cut
+        _this2.x * 16, _this2.y * 16, 48, //size in x
+        48 //size in y
+        );
+      };
+    }
+  },
+  created: function created() {
+    this.init();
+    this.heroMovement();
+  },
+  beforeDestroy: function beforeDestroy() {//window.removeEventListener('keypress', this.onKeyPress);
+  }
 });
 
 /***/ }),
@@ -5863,6 +6016,7 @@ Vue.component('ipcomponent', (__webpack_require__(/*! ./components/IpComponent.v
 Vue.component('keyboardcomponent', (__webpack_require__(/*! ./components/KeyboardComponent.vue */ "./resources/js/components/KeyboardComponent.vue")["default"]));
 Vue.component('worldcomponent', (__webpack_require__(/*! ./components/WorldComponent.vue */ "./resources/js/components/WorldComponent.vue")["default"]));
 Vue.component('commandscomponent', (__webpack_require__(/*! ./components/CommandsComponent.vue */ "./resources/js/components/CommandsComponent.vue")["default"]));
+Vue.component('gamecomponent', (__webpack_require__(/*! ./components/GameComponent.vue */ "./resources/js/components/GameComponent.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -5870,7 +6024,13 @@ Vue.component('commandscomponent', (__webpack_require__(/*! ./components/Command
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  delimiters: ['{%', '%}'],
+  data: function data() {
+    return {
+      consola: false
+    };
+  }
 });
 
 /***/ }),
@@ -27188,6 +27348,30 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, "\ntd[data-v-1837a5fa], th[data-v-1837a5fa]{\n    color: white;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\n.game-canvas[data-v-5cec6160]{\r\n    width: 340px;\r\n    height: 192px;\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: scale(1) translateY(50%);\n}\n.game-canvas canvas[data-v-5cec6160]{\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n        image-rendering: -moz-crisp-edges;\r\n        image-rendering: pixelated;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66220,6 +66404,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_style_index_0_id_5cec6160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_style_index_0_id_5cec6160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_style_index_0_id_5cec6160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WorldComponent.vue?vue&type=style&index=0&lang=css&":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/WorldComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -66969,6 +67183,47 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/GameComponent.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/components/GameComponent.vue ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./GameComponent.vue?vue&type=template&id=5cec6160&scoped=true& */ "./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true&");
+/* harmony import */ var _GameComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./GameComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/GameComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _GameComponent_vue_vue_type_style_index_0_id_5cec6160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& */ "./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _GameComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "5cec6160",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/GameComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/InfoComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/InfoComponent.vue ***!
@@ -67191,6 +67446,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/GameComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/GameComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GameComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/InfoComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/InfoComponent.vue?vue&type=script&lang=js& ***!
@@ -67281,6 +67552,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
+  \************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_style_index_0_id_5cec6160_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/WorldComponent.vue?vue&type=style&index=0&lang=css&":
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/WorldComponent.vue?vue&type=style&index=0&lang=css& ***!
@@ -67358,6 +67642,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true& ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_GameComponent_vue_vue_type_template_id_5cec6160_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./GameComponent.vue?vue&type=template&id=5cec6160&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true&");
 
 
 /***/ }),
@@ -67910,6 +68211,40 @@ var staticRenderFns = [
           ]),
         ]),
       ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true&":
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true& ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "gameContent" }, [
+      _c("canvas", { staticClass: "game-canvas", attrs: { id: "c" } }),
     ])
   },
 ]
