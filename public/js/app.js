@@ -5574,6 +5574,161 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      command: {
+        command: "",
+        description: "",
+        result: ""
+      },
+      listCommands: [],
+      editCommandForm: false
+    };
+  },
+  mounted: function mounted() {},
+  methods: {
+    processCommand: function processCommand() {
+      var _this = this;
+
+      var parameters = {
+        command: this.command.command,
+        description: this.command.description,
+        result: this.command.result
+      };
+      axios.post('api/add_command', parameters).then(function (res) {
+        _this.listCommands.push(res.data);
+      });
+      this.command = {};
+    },
+    deleteCommand: function deleteCommand(item, index) {
+      var _this2 = this;
+
+      var parameters = {
+        id: item.id
+      };
+      axios.post('api/delete_command', parameters).then(function () {
+        _this2.listCommands.splice(index, 1);
+      });
+    },
+    editCommand: function editCommand(item) {
+      this.command = item;
+      this.editCommandForm = true;
+    },
+    processEditCommand: function processEditCommand() {
+      var _this3 = this;
+
+      this.editCommandForm = false;
+      var parameters = {
+        command: this.command.command,
+        description: this.command.description,
+        result: this.command.result,
+        id: this.command.id
+      };
+      axios.post('api/edit_command', parameters).then(function (res) {
+        var index = _this3.listCommands.findIndex(function (searchCommand) {
+          return searchCommand.id === res.data.id;
+        });
+
+        _this3.listCommands[index] = res.data;
+        _this3.command.command = "";
+        _this3.command.description = "";
+        _this3.command.result = "";
+      });
+    }
+  },
+  created: function created() {
+    var _this4 = this;
+
+    axios.get('api/get_commands').then(function (res) {
+      _this4.listCommands = res.data;
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=script&lang=js& ***!
@@ -5585,6 +5740,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5603,7 +5843,19 @@ __webpack_require__.r(__webpack_exports__);
       heroShowCutHeight: 32,
       heroShowCoorImageX: 0,
       heroShowCoorImageY: 0,
-      hero: null
+      hero: null,
+      startFight: false,
+      fighters: [],
+      selectedFighter: {},
+      selectedEnemy: {},
+      heroHealth: 1000,
+      enemyHealth: 1500,
+      currentHeroHealth: 100,
+      currentEnemyHealth: 100,
+      heroDef: 100,
+      enemyDef: 100,
+      heroStrength: 123,
+      enemyStrength: 140
     };
   },
   mounted: function mounted() {
@@ -5625,7 +5877,7 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       var npc = new Image();
-      npc.src = "/images/heroes/npc1.png";
+      npc.src = "/images/heroes/hero_mini/huitzilopochtli_32.png";
 
       npc.onload = function () {
         _this.ctx.drawImage(npc, 0, //left cut 
@@ -5635,6 +5887,22 @@ __webpack_require__.r(__webpack_exports__);
         14 * 16, //x position
         1 * 16, //y position
         48, //size in x
+        48 //size in y
+        );
+      };
+
+      this.hero = new Image();
+      this.hero.src = "/images/heroes/hero_mini/quetzalcoatl_32.png";
+
+      this.hero.onload = function () {
+        _this.heroShowCoorImageX = 0;
+        _this.heroShowCoorImageY = 0;
+
+        _this.ctx.drawImage(_this.hero, _this.heroShowCoorImageX, //left cut 
+        _this.heroShowCoorImageY, //top cut
+        _this.heroShowCutWidth, //width of cut
+        _this.heroShowCutHeight, //height of cut
+        _this.x * 16, _this.y * 16, 48, //size in x
         48 //size in y
         );
       };
@@ -5649,10 +5917,9 @@ __webpack_require__.r(__webpack_exports__);
           this.x = this.x - 1;
         } else {
           this.x = -1;
-        }
+        } // this.heroShowCoorImageX;
+        // this.heroShowCoorImageY = 32 * 3;
 
-        this.heroShowCoorImageX;
-        this.heroShowCoorImageY = 32 * 3;
       }
 
       if (e.key == "ArrowRight") {
@@ -5660,11 +5927,9 @@ __webpack_require__.r(__webpack_exports__);
           this.x = this.x + 1;
         } else {
           this.x = 16;
-        }
+        } // this.heroShowCoorImageX;
+        // this.heroShowCoorImageY = 32 * 1;
 
-        this.x = this.x + 1;
-        this.heroShowCoorImageX;
-        this.heroShowCoorImageY = 32 * 1;
       }
 
       if (e.key == "ArrowUp") {
@@ -5672,10 +5937,9 @@ __webpack_require__.r(__webpack_exports__);
           this.y = this.y - 1;
         } else {
           this.y = -2;
-        }
+        } // this.heroShowCoorImageX;
+        // this.heroShowCoorImageY = 32 * 2;
 
-        this.heroShowCoorImageX;
-        this.heroShowCoorImageY = 32 * 2;
       }
 
       if (e.key == "ArrowDown") {
@@ -5684,39 +5948,95 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           this.y = 7;
         } //this.y = this.y+1;
+        // this.heroShowCoorImageX;
+        // this.heroShowCoorImageY = 32 * 0;
 
-
-        this.heroShowCoorImageX;
-        this.heroShowCoorImageY = 32 * 0;
       }
 
       if (e.key == "Escape") {
         this.$root.consola = true;
       }
 
+      if (this.x == 13 && this.y == 1) {
+        this.startFight = true;
+      } else {
+        this.startFight = false;
+      }
+
       this.init();
     },
     keyUp1: function keyUp1(e) {},
     heroMovement: function heroMovement() {
-      var _this2 = this;
+      /*this.hero = new Image();
+      this.hero.src = "/images/heroes/hero_mini/quetzalcoatl_32.png";
+      this.hero.onload = () =>{
+          this.heroShowCoorImageX = 0;
+          this.heroShowCoorImageY = 0;
+          this.ctx.drawImage(
+              this.hero, 
+              this.heroShowCoorImageX, //left cut 
+              this.heroShowCoorImageY, //top cut
+              this.heroShowCutWidth, //width of cut
+              this.heroShowCutHeight, //height of cut
+              this.x * 16,
+              this.y * 16,
+              48, //size in x
+              48 //size in y
+          )
+      }*/
+    },
+    selectFighter: function selectFighter(item) {
+      this.selectedFighter = item;
+    },
+    selectEnemy: function selectEnemy(item) {
+      this.selectedEnemy = item;
+    },
+    hitEnemy: function hitEnemy() {
+      var damageHero = 0;
+      var damageEnemy = 0;
+      damageHero = Math.floor((this.heroStrength - this.enemyDef) / Math.random());
+      this.currentEnemyHealth = this.currentEnemyHealth - 100 * damageHero / this.enemyHealth;
 
-      this.hero = new Image();
-      this.hero.src = "/images/heroes/erio.png";
+      if (this.currentEnemyHealth < 0) {
+        this.currentEnemyHealth = 0;
+      }
 
-      this.hero.onload = function () {
-        _this2.ctx.drawImage(_this2.hero, _this2.heroShowCoorImageX, //left cut 
-        _this2.heroShowCoorImageY, //top cut
-        _this2.heroShowCutWidth, //width of cut
-        _this2.heroShowCutHeight, //height of cut
-        _this2.x * 16, _this2.y * 16, 48, //size in x
-        48 //size in y
-        );
-      };
+      damageEnemy = Math.floor((this.enemyStrength - this.heroDef) / Math.random());
+      this.currentHeroHealth = this.currentHeroHealth - 100 * damageEnemy / this.heroHealth;
+
+      if (this.currentHeroHealth < 0) {
+        this.currentHeroHealth = 0;
+      }
+
+      console.log(this.currentEnemyHealth + " " + this.currentHeroHealth);
     }
   },
   created: function created() {
     this.init();
-    this.heroMovement();
+    var huitzilopochtli = {
+      id: 1,
+      name: "Huitzi",
+      sprite: "images/heroes/huitzilopochtli.png"
+    };
+    this.fighters.push(huitzilopochtli);
+    var quetzalcoatl = {
+      id: 2,
+      name: "Quetzalcoatl",
+      sprite: "images/heroes/quetzalcoatl.png"
+    };
+    this.fighters.push(quetzalcoatl);
+    var tlaloc = {
+      id: 3,
+      name: "Tlaloc",
+      sprite: "images/heroes/tlaloc.png"
+    };
+    this.fighters.push(tlaloc);
+    var tonatiuh = {
+      id: 4,
+      name: "Tonatiuh",
+      sprite: "images/heroes/tonatiuh.png"
+    };
+    this.fighters.push(tonatiuh);
   },
   beforeDestroy: function beforeDestroy() {//window.removeEventListener('keypress', this.onKeyPress);
   }
@@ -6017,6 +6337,7 @@ Vue.component('keyboardcomponent', (__webpack_require__(/*! ./components/Keyboar
 Vue.component('worldcomponent', (__webpack_require__(/*! ./components/WorldComponent.vue */ "./resources/js/components/WorldComponent.vue")["default"]));
 Vue.component('commandscomponent', (__webpack_require__(/*! ./components/CommandsComponent.vue */ "./resources/js/components/CommandsComponent.vue")["default"]));
 Vue.component('gamecomponent', (__webpack_require__(/*! ./components/GameComponent.vue */ "./resources/js/components/GameComponent.vue")["default"]));
+Vue.component('fightercomponent', (__webpack_require__(/*! ./components/FighterComponent.vue */ "./resources/js/components/FighterComponent.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -6028,7 +6349,7 @@ var app = new Vue({
   delimiters: ['{%', '%}'],
   data: function data() {
     return {
-      consola: false
+      consola: true
     };
   }
 });
@@ -27354,6 +27675,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "\ntd[data-v-1837a5fa], th[data-v-1837a
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "\ntd[data-v-d42df9aa], th[data-v-d42df9aa]{\n    color: white;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
 /*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
@@ -27371,7 +27716,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.game-canvas[data-v-5cec6160]{\r\n    width: 340px;\r\n    height: 192px;\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: scale(1) translateY(50%);\n}\n.game-canvas canvas[data-v-5cec6160]{\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n        image-rendering: -moz-crisp-edges;\r\n        image-rendering: pixelated;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.game-canvas[data-v-5cec6160]{\r\n    width: 340px;\r\n    height: 192px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: scale(1);\n}\n.game-canvas canvas[data-v-5cec6160]{\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n        image-rendering: -moz-crisp-edges;\r\n        image-rendering: pixelated;\n}\n.listInstructions[data-v-5cec6160]{\r\n    list-style: none;\n}\nh1[data-v-5cec6160], p[data-v-5cec6160]{\r\n    color: white;\n}\n.fighter[data-v-5cec6160]{\r\n    cursor: pointer;\n}\n.fighter >  img[data-v-5cec6160]{\r\n    width: 40px;\n}\n.fighter[data-v-5cec6160]:hover{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterActive[data-v-5cec6160]{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterName[data-v-5cec6160]{\r\n    font-size: 10px;\n}\n.heroFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\n.enemyFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -66404,6 +66749,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_style_index_0_id_d42df9aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_style_index_0_id_d42df9aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_style_index_0_id_d42df9aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
@@ -67183,6 +67558,47 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/FighterComponent.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/components/FighterComponent.vue ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true& */ "./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true&");
+/* harmony import */ var _FighterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FighterComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/FighterComponent.vue?vue&type=script&lang=js&");
+/* harmony import */ var _FighterComponent_vue_vue_type_style_index_0_id_d42df9aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& */ "./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _FighterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
+  _FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  "d42df9aa",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/FighterComponent.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/GameComponent.vue":
 /*!***************************************************!*\
   !*** ./resources/js/components/GameComponent.vue ***!
@@ -67446,6 +67862,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/FighterComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/FighterComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FighterComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/components/GameComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/GameComponent.vue?vue&type=script&lang=js& ***!
@@ -67552,6 +67984,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& ***!
+  \***************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_10_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_style_index_0_id_d42df9aa_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-10[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=style&index=0&id=d42df9aa&scoped=true&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css&":
 /*!************************************************************************************************************!*\
   !*** ./resources/js/components/GameComponent.vue?vue&type=style&index=0&id=5cec6160&scoped=true&lang=css& ***!
@@ -67642,6 +68087,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true& ***!
+  \*************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FighterComponent_vue_vue_type_template_id_d42df9aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true&");
 
 
 /***/ }),
@@ -68220,6 +68682,308 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/FighterComponent.vue?vue&type=template&id=d42df9aa&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _vm.editCommandForm == false
+      ? _c(
+          "form",
+          {
+            on: {
+              submit: function ($event) {
+                $event.preventDefault()
+                return _vm.processCommand()
+              },
+            },
+          },
+          [
+            _c("h1", [_vm._v("Add Fighter")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Command")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.command,
+                    expression: "command.command",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Command" },
+                domProps: { value: _vm.command.command },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "command", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Description")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.description,
+                    expression: "command.description",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Description" },
+                domProps: { value: _vm.command.description },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "description", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Result")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.result,
+                    expression: "command.result",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Result" },
+                domProps: { value: _vm.command.result },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "result", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                staticStyle: { "margin-top": "10px" },
+                attrs: { type: "submit" },
+              },
+              [_vm._v("Save")]
+            ),
+          ]
+        )
+      : _c(
+          "form",
+          {
+            on: {
+              submit: function ($event) {
+                $event.preventDefault()
+                return _vm.processEditCommand()
+              },
+            },
+          },
+          [
+            _c("h1", [_vm._v("Edit Commands")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Command")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.command,
+                    expression: "command.command",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: "Command" },
+                domProps: { value: _vm.command.command },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "command", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Description")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.description,
+                    expression: "command.description",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Description" },
+                domProps: { value: _vm.command.description },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "description", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c("label", [_vm._v("Result")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.command.result,
+                    expression: "command.result",
+                  },
+                ],
+                staticClass: "form-control",
+                attrs: { placeholder: "Result" },
+                domProps: { value: _vm.command.result },
+                on: {
+                  input: function ($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.command, "result", $event.target.value)
+                  },
+                },
+              }),
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                staticStyle: { "margin-top": "10px" },
+                attrs: { type: "submit" },
+              },
+              [_vm._v("Save")]
+            ),
+          ]
+        ),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table", staticStyle: { "margin-top": "100px" } },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.listCommands, function (item, index) {
+            return _c("tr", { key: index }, [
+              _c("td", [_vm._v(_vm._s(item.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.command))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.description))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.result))]),
+              _vm._v(" "),
+              _c("td", [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    on: {
+                      click: function ($event) {
+                        return _vm.deleteCommand(item, index)
+                      },
+                    },
+                  },
+                  [_vm._v("Delete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    on: {
+                      click: function ($event) {
+                        return _vm.editCommand(item)
+                      },
+                    },
+                  },
+                  [_vm._v("Edit")]
+                ),
+              ]),
+            ])
+          }),
+          0
+        ),
+      ]
+    ),
+  ])
+}
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Command")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Result")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Options")]),
+      ]),
+    ])
+  },
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true&":
 /*!*************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/GameComponent.vue?vue&type=template&id=5cec6160&scoped=true& ***!
@@ -68236,15 +69000,238 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "gameContent", staticStyle: { padding: "20px" } },
+    [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _vm.selectedEnemy.id > 0
+          ? _c(
+              "div",
+              {
+                staticClass: "col",
+                staticStyle: {
+                  background:
+                    "url(https://cdn.wallpapersafari.com/41/30/KhfVCl.png)",
+                  "background-size": "100% 100%",
+                },
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "col",
+                      staticStyle: { "padding-top": "30px" },
+                    },
+                    [
+                      _c("div", { staticClass: "progress " }, [
+                        _c("div", {
+                          staticClass: "progress-bar",
+                          style: "width: " + _vm.currentEnemyHealth + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": "100",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": _vm.enemyHealth,
+                          },
+                        }),
+                      ]),
+                    ]
+                  ),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c("div", { staticClass: "progress" }, [
+                      _c("div", {
+                        staticClass: "progress-bar",
+                        style: "width: " + _vm.currentHeroHealth + "%",
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": "100",
+                          "aria-valuemin": "0",
+                          "aria-valuemax": _vm.heroHealth,
+                        },
+                      }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "enemyFrame",
+                        staticStyle: { "margin-top": "30px" },
+                      },
+                      [_c("img", { attrs: { src: _vm.selectedEnemy.sprite } })]
+                    ),
+                  ]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col" }, [
+                    _c("div", { staticClass: "heroFrame" }, [
+                      _c("img", { attrs: { src: _vm.selectedFighter.sprite } }),
+                    ]),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success",
+                        on: {
+                          click: function ($event) {
+                            return _vm.hitEnemy()
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Hit\n                    "
+                        ),
+                      ]
+                    ),
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col" }),
+                ]),
+              ]
+            )
+          : _vm._e(),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _vm.startFight == true
+          ? _c("div", { staticClass: "col text-center" }, [
+              _c("h1", [_vm._v("Choose your fighter")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row fighters" },
+                _vm._l(_vm.fighters, function (item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "col-sm-3 fighter",
+                      class:
+                        _vm.selectedFighter.id == item.id
+                          ? "fighterActive"
+                          : "",
+                      on: {
+                        click: function ($event) {
+                          return _vm.selectFighter(item)
+                        },
+                      },
+                    },
+                    [
+                      _c("img", { attrs: { src: item.sprite } }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "fighterName" }, [
+                        _vm._v(_vm._s(item.name)),
+                      ]),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.selectedFighter.id
+          ? _c("div", { staticClass: "col text-center" }, [
+              _c("h1", [_vm._v("Choose an enemy")]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "row fighters" },
+                _vm._l(_vm.fighters, function (item, index) {
+                  return _c(
+                    "div",
+                    {
+                      key: index,
+                      staticClass: "col-sm-3 fighter",
+                      class:
+                        _vm.selectedEnemy.id == item.id ? "fighterActive" : "",
+                      on: {
+                        click: function ($event) {
+                          return _vm.selectEnemy(item)
+                        },
+                      },
+                    },
+                    [
+                      _c("img", { attrs: { src: item.sprite } }),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "fighterName" }, [
+                        _vm._v(_vm._s(item.name)),
+                      ]),
+                    ]
+                  )
+                }),
+                0
+              ),
+            ])
+          : _vm._e(),
+      ]),
+    ]
+  )
 }
 var staticRenderFns = [
   function () {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "gameContent" }, [
+    return _c("div", { staticClass: "col" }, [
       _c("canvas", { staticClass: "game-canvas", attrs: { id: "c" } }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col" }, [
+      _c("h2", { staticClass: "text-white" }, [_vm._v("Instructions")]),
+      _vm._v(" "),
+      _c("ul", { staticClass: "text-white listInstructions" }, [
+        _c("li", [_vm._v("Press Esc to leave")]),
+        _vm._v(" "),
+        _c("li", [
+          _vm._v("Press the arrows to move"),
+          _c("br"),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "fa fa-arrow-left",
+            attrs: { "aria-hidden": "true" },
+          }),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "fa fa-arrow-right",
+            attrs: { "aria-hidden": "true" },
+          }),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "fa fa-arrow-up",
+            attrs: { "aria-hidden": "true" },
+          }),
+          _vm._v(" "),
+          _c("i", {
+            staticClass: "fa fa-arrow-down",
+            attrs: { "aria-hidden": "true" },
+          }),
+        ]),
+      ]),
     ])
   },
 ]

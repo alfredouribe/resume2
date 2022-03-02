@@ -28,6 +28,7 @@ Vue.component('keyboardcomponent', require('./components/KeyboardComponent.vue')
 Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
 Vue.component('commandscomponent', require('./components/CommandsComponent.vue').default);
 Vue.component('gamecomponent', require('./components/GameComponent.vue').default);
+Vue.component('fightercomponent', require('./components/FighterComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,7 +41,7 @@ const app = new Vue({
     delimiters: ['{%', '%}'],
     data(){
         return{
-            consola: false
+            consola: true
         }
     }
 });

@@ -1,5 +1,7 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/init.js": "/js/init.js",
+    "/js/Overworld.js": "/js/Overworld.js",
     "/css/app.css": "/css/app.css",
     "/css/main.css": "/css/main.css",
     "/webfonts/fa-brands-400.ttf": "/webfonts/fa-brands-400.ttf",
@@ -9,5 +11,16 @@
     "/webfonts/fa-solid-900.ttf": "/webfonts/fa-solid-900.ttf",
     "/webfonts/fa-solid-900.woff2": "/webfonts/fa-solid-900.woff2",
     "/webfonts/fa-v4compatibility.ttf": "/webfonts/fa-v4compatibility.ttf",
-    "/webfonts/fa-v4compatibility.woff2": "/webfonts/fa-v4compatibility.woff2"
+    "/webfonts/fa-v4compatibility.woff2": "/webfonts/fa-v4compatibility.woff2",
+    "/images/maps/scene0.gif": "/images/maps/scene0.gif",
+    "/images/heroes/erio.png": "/images/heroes/erio.png",
+    "/images/heroes/huitzilopochtli.png": "/images/heroes/huitzilopochtli.png",
+    "/images/heroes/npc1.png": "/images/heroes/npc1.png",
+    "/images/heroes/quetzalcoatl.png": "/images/heroes/quetzalcoatl.png",
+    "/images/heroes/tlaloc.png": "/images/heroes/tlaloc.png",
+    "/images/heroes/tonatiuh.png": "/images/heroes/tonatiuh.png",
+    "/images/heroes/hero_mini/huitzilopochtli_32.png": "/images/heroes/hero_mini/huitzilopochtli_32.png",
+    "/images/heroes/hero_mini/quetzalcoatl_32.png": "/images/heroes/hero_mini/quetzalcoatl_32.png",
+    "/images/heroes/hero_mini/tlaloc_32.png": "/images/heroes/hero_mini/tlaloc_32.png",
+    "/images/heroes/hero_mini/tonatiuh_32.png": "/images/heroes/hero_mini/tonatiuh_32.png"
 }
