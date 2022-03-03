@@ -25,4 +25,5 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/Overworld.js', 'public/js/Overworld.js')
     .copy('resources/images/maps/', 'public/images/maps/')
     .copy('resources/images/heroes/', 'public/images/heroes/')
-    .copy('resources/images/heroes/hero_mini/', 'public/images/heroes/hero_mini/');
+    .copy('resources/images/heroes/hero_mini/', 'public/images/heroes/hero_mini/')
+    .copy('resources/songs', 'public/songs');

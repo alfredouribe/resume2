@@ -85,10 +85,60 @@
                     </div>
                 </div>
             </div>
-
+            <small><a href="https://www.youtube.com/watch?v=TNYTFOiNO4s&ab_channel=AdamHaynes" target="_blank">Song credits to Adam Haynes</a></small>
         </div>   
 
+        <audio
+            ref="audio"
+            src="/songs/song.mp3"
+            preload
+            loop
+            id="audio"
+            autoplay
+            muted
+        ></audio>
 
+        <audio
+            ref="audio"
+            src="/songs/sfx_wpn_punch4.wav"
+            preload
+            id="audioPunch"
+        ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_deathscream_human1.wav"
+            preload
+            id="heroDeath"
+        ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_deathscream_human11.wav"
+            preload
+            id="enemyDeath"
+        ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_movement_footsteps1b.wav"
+            preload
+            id="step"
+        ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_movement_portal2.wav"
+            preload
+            id="enemyFound"
+        ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_movement_portal3.wav"
+            preload
+            id="selectFighter"
+        ></audio>
     </div>
 </template>
 
@@ -129,12 +179,14 @@
             this.vueCanvas = this.ctx;
             document.addEventListener("keydown", this.keyDown1)
             document.addEventListener("keyup", this.keyUp1)
+            var audio = document.getElementById("audio");
+            audio.volume = 0.1
             
         },
         methods:{
             init(){
                 const image = new window.Image();
-                image.src = "/images/maps/scene0.gif";
+                image.src = "/images/maps/map.gif";
                 image.onload = () =>{
                     this.ctx.drawImage(image,0,0)
                 };
@@ -209,6 +261,19 @@
             },
             keyDown1(e){
                 let k = event.code
+                var step = document.getElementById("step");
+                if(step){
+                    step.volume = 0.3
+                    step.play();
+                }
+                
+
+                var enemyFound = document.getElementById("enemyFound");
+                if(enemyFound){
+                    enemyFound.volume = 0.3
+                }
+                
+
                 if(e.key == "ArrowLeft"){
                     if(this.x-1 > -2){
                         this.x = this.x-1;
@@ -257,11 +322,12 @@
 
                 if((this.x == 13 && this.y == 1) || (this.x == 7 && this.y == 2) || (this.x == 2 && this.y == 3)){
                     this.startFight = true;
+                    enemyFound.play()
                 }else{
                     this.startFight = false;
                 }
 
-                console.log(this.x + " " + this.y)
+                //console.log(this.x + " " + this.y)
 
                 this.init();
 
@@ -291,13 +357,30 @@
                 
             },
             selectFighter(item){
+                var selectFighter = document.getElementById("selectFighter");
+                selectFighter.volume = 0.3
+                selectFighter.play()
                 this.selectedFighter = item;
             },
             selectEnemy(item){
+                var selectFighter = document.getElementById("selectFighter");
+                selectFighter.volume = 0.3
+                selectFighter.play()
                 this.selectedEnemy = item;
                 this.initStats();
             },
             hitEnemy(){
+                var audioPunch = document.getElementById("audioPunch");
+                audioPunch.volume = 0.3
+                audioPunch.play();
+
+                var heroDeath = document.getElementById("heroDeath");
+                heroDeath.volume = 0.3
+
+                var enemyDeath = document.getElementById("enemyDeath");
+                enemyDeath.volume = 0.3
+
+            
                 let damageHero = 0;
                 let damageEnemy = 0;
 
@@ -313,6 +396,8 @@
                     this.selectedFighter = {};
                     this.selectedEnemy = {};
                     this.wins = this.wins+1;
+                    enemyDeath.play()
+                    
                 }
 
                 damageEnemy = Math.floor( (this.enemyStrength - this.heroDef) + (Math.random() * (this.enemyStrength - this.heroDef)));
@@ -326,6 +411,7 @@
                     this.selectedFighter = {};
                     this.selectedEnemy = {};
                     this.loses = this.loses+1;
+                    heroDeath.play()
                 }
             },
             initStats(){
@@ -375,6 +461,8 @@
             //window.removeEventListener('keypress', this.onKeyPress);
         },
     }
+
+    
 
 </script>
 

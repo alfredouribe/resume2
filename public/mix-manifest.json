@@ -15,14 +15,16 @@
     "/images/maps/scene0.gif": "/images/maps/scene0.gif",
     "/images/heroes/erio.png": "/images/heroes/erio.png",
     "/images/heroes/huitzilopochtli.png": "/images/heroes/huitzilopochtli.png",
+    "/images/heroes/ninja.png": "/images/heroes/ninja.png",
     "/images/heroes/npc1.png": "/images/heroes/npc1.png",
     "/images/heroes/quetzalcoatl.png": "/images/heroes/quetzalcoatl.png",
+    "/images/heroes/samurai.png": "/images/heroes/samurai.png",
     "/images/heroes/tlaloc.png": "/images/heroes/tlaloc.png",
     "/images/heroes/tonatiuh.png": "/images/heroes/tonatiuh.png",
     "/images/heroes/hero_mini/huitzilopochtli_32.png": "/images/heroes/hero_mini/huitzilopochtli_32.png",
     "/images/heroes/hero_mini/quetzalcoatl_32.png": "/images/heroes/hero_mini/quetzalcoatl_32.png",
     "/images/heroes/hero_mini/tlaloc_32.png": "/images/heroes/hero_mini/tlaloc_32.png",
     "/images/heroes/hero_mini/tonatiuh_32.png": "/images/heroes/hero_mini/tonatiuh_32.png",
-    "/images/heroes/ninja.png": "/images/heroes/ninja.png",
-    "/images/heroes/samurai.png": "/images/heroes/samurai.png"
+    "/images/maps/map.gif": "/images/maps/map.gif",
+    "/images/maps/map.psd": "/images/maps/map.psd"
 }

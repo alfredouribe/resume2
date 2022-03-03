@@ -5834,6 +5834,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5869,13 +5919,15 @@ __webpack_require__.r(__webpack_exports__);
     this.vueCanvas = this.ctx;
     document.addEventListener("keydown", this.keyDown1);
     document.addEventListener("keyup", this.keyUp1);
+    var audio = document.getElementById("audio");
+    audio.volume = 0.1;
   },
   methods: {
     init: function init() {
       var _this = this;
 
       var image = new window.Image();
-      image.src = "/images/maps/scene0.gif";
+      image.src = "/images/maps/map.gif";
 
       image.onload = function () {
         _this.ctx.drawImage(image, 0, 0);
@@ -5946,6 +5998,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     keyDown1: function keyDown1(e) {
       var k = event.code;
+      var step = document.getElementById("step");
+
+      if (step) {
+        step.volume = 0.3;
+        step.play();
+      }
+
+      var enemyFound = document.getElementById("enemyFound");
+
+      if (enemyFound) {
+        enemyFound.volume = 0.3;
+      }
 
       if (e.key == "ArrowLeft") {
         if (this.x - 1 > -2) {
@@ -5994,11 +6058,12 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.x == 13 && this.y == 1 || this.x == 7 && this.y == 2 || this.x == 2 && this.y == 3) {
         this.startFight = true;
+        enemyFound.play();
       } else {
         this.startFight = false;
-      }
+      } //console.log(this.x + " " + this.y)
 
-      console.log(this.x + " " + this.y);
+
       this.init();
     },
     keyUp1: function keyUp1(e) {},
@@ -6022,13 +6087,26 @@ __webpack_require__.r(__webpack_exports__);
       }*/
     },
     selectFighter: function selectFighter(item) {
+      var selectFighter = document.getElementById("selectFighter");
+      selectFighter.volume = 0.3;
+      selectFighter.play();
       this.selectedFighter = item;
     },
     selectEnemy: function selectEnemy(item) {
+      var selectFighter = document.getElementById("selectFighter");
+      selectFighter.volume = 0.3;
+      selectFighter.play();
       this.selectedEnemy = item;
       this.initStats();
     },
     hitEnemy: function hitEnemy() {
+      var audioPunch = document.getElementById("audioPunch");
+      audioPunch.volume = 0.3;
+      audioPunch.play();
+      var heroDeath = document.getElementById("heroDeath");
+      heroDeath.volume = 0.3;
+      var enemyDeath = document.getElementById("enemyDeath");
+      enemyDeath.volume = 0.3;
       var damageHero = 0;
       var damageEnemy = 0;
       damageHero = Math.floor(this.heroStrength - this.enemyDef + Math.random() * (this.heroStrength - this.enemyDef));
@@ -6041,6 +6119,7 @@ __webpack_require__.r(__webpack_exports__);
         this.selectedFighter = {};
         this.selectedEnemy = {};
         this.wins = this.wins + 1;
+        enemyDeath.play();
       }
 
       damageEnemy = Math.floor(this.enemyStrength - this.heroDef + Math.random() * (this.enemyStrength - this.heroDef));
@@ -6053,6 +6132,7 @@ __webpack_require__.r(__webpack_exports__);
         this.selectedFighter = {};
         this.selectedEnemy = {};
         this.loses = this.loses + 1;
+        heroDeath.play();
       }
     },
     initStats: function initStats() {
@@ -69325,7 +69405,75 @@ var render = function () {
               ),
             ])
           : _vm._e(),
+        _vm._v(" "),
+        _vm._m(2),
       ]),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/song.mp3",
+          preload: "",
+          loop: "",
+          id: "audio",
+          autoplay: "",
+          muted: "",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_wpn_punch4.wav",
+          preload: "",
+          id: "audioPunch",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_deathscream_human1.wav",
+          preload: "",
+          id: "heroDeath",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_deathscream_human11.wav",
+          preload: "",
+          id: "enemyDeath",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_movement_footsteps1b.wav",
+          preload: "",
+          id: "step",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_movement_portal2.wav",
+          preload: "",
+          id: "enemyFound",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_movement_portal3.wav",
+          preload: "",
+          id: "selectFighter",
+        },
+      }),
     ]
   )
 }
@@ -69365,6 +69513,23 @@ var staticRenderFns = [
         staticClass: "fa fa-arrow-down",
         attrs: { "aria-hidden": "true" },
       }),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("small", [
+      _c(
+        "a",
+        {
+          attrs: {
+            href: "https://www.youtube.com/watch?v=TNYTFOiNO4s&ab_channel=AdamHaynes",
+            target: "_blank",
+          },
+        },
+        [_vm._v("Song credits to Adam Haynes")]
+      ),
     ])
   },
 ]
