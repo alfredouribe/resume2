@@ -24,3 +24,4 @@ Route::get('get_commands',['App\Http\Controllers\ApiController', 'get_commands']
 Route::post('delete_command',['App\Http\Controllers\ApiController', 'delete_command'])->name('delete_command');
 Route::post('edit_command',['App\Http\Controllers\ApiController', 'edit_command'])->name('edit_command');
 Route::post('process_command',['App\Http\Controllers\ApiController', 'process_command'])->name('process_command');
+Route::post('authenticate',['App\Http\Controllers\ApiController', 'authenticate'])->name('authenticate');

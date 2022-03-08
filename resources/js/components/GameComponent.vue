@@ -22,7 +22,10 @@
                             <div class="progress-bar" role="progressbar" :style="'width: '+currentHeroHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="heroHealth"></div>
                         </div>
                     </div>
-                    <div class="col"></div>
+                    <div class="col text-center">
+                        <h1 class="text-success" v-if="win == true && showMessageWin == true">WIN</h1>
+                        <h1 class="text-danger" v-if="win == false && showMessageWin == true">LOSE</h1>
+                    </div>
                     <div class="col">
                         
 
@@ -170,7 +173,9 @@
                 heroStrength: 0,
                 enemyStrength: 0,
                 wins: 0,
-                loses: 0
+                loses: 0,
+                win: true,
+                showMessageWin: false
             }
         },
         mounted(){

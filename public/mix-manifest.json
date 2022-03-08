@@ -12,6 +12,8 @@
     "/webfonts/fa-solid-900.woff2": "/webfonts/fa-solid-900.woff2",
     "/webfonts/fa-v4compatibility.ttf": "/webfonts/fa-v4compatibility.ttf",
     "/webfonts/fa-v4compatibility.woff2": "/webfonts/fa-v4compatibility.woff2",
+    "/images/maps/map.gif": "/images/maps/map.gif",
+    "/images/maps/map.psd": "/images/maps/map.psd",
     "/images/maps/scene0.gif": "/images/maps/scene0.gif",
     "/images/heroes/erio.png": "/images/heroes/erio.png",
     "/images/heroes/huitzilopochtli.png": "/images/heroes/huitzilopochtli.png",
@@ -25,6 +27,11 @@
     "/images/heroes/hero_mini/quetzalcoatl_32.png": "/images/heroes/hero_mini/quetzalcoatl_32.png",
     "/images/heroes/hero_mini/tlaloc_32.png": "/images/heroes/hero_mini/tlaloc_32.png",
     "/images/heroes/hero_mini/tonatiuh_32.png": "/images/heroes/hero_mini/tonatiuh_32.png",
-    "/images/maps/map.gif": "/images/maps/map.gif",
-    "/images/maps/map.psd": "/images/maps/map.psd"
+    "/songs/sfx_deathscream_human1.wav": "/songs/sfx_deathscream_human1.wav",
+    "/songs/sfx_deathscream_human11.wav": "/songs/sfx_deathscream_human11.wav",
+    "/songs/sfx_movement_footsteps1b.wav": "/songs/sfx_movement_footsteps1b.wav",
+    "/songs/sfx_movement_portal2.wav": "/songs/sfx_movement_portal2.wav",
+    "/songs/sfx_movement_portal3.wav": "/songs/sfx_movement_portal3.wav",
+    "/songs/sfx_wpn_punch4.wav": "/songs/sfx_wpn_punch4.wav",
+    "/songs/song.mp3": "/songs/song.mp3"
 }

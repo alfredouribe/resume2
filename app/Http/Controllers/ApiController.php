@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\Command;
 
 class ApiController extends Controller
@@ -62,5 +64,39 @@ class ApiController extends Controller
         }
         
         return $command;
+    }
+
+    public function authenticate(Request $request){
+        
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+
+        if(Auth::id()){
+            $response = [
+                "0"=> [
+                    "command" => "You are already loged in",
+                    "result" => ""
+                ]
+            ];
+        }else if(Auth::attempt($credentials)){
+            //return redirect()->intended('commands');
+            $response = [
+                "0"=> [
+                    "command" => "success",
+                    "result" => "Now you can edit the commands"
+                ]
+            ];
+        }else{
+            $response = [
+                "0" => [
+                    "command" => "Error",
+                    "result" => "The credentials are wrong, try again"
+                ]
+            ];
+        }
+
+        echo json_encode($response);
     }
 }
