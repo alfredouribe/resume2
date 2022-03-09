@@ -5926,6 +5926,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5954,7 +5961,15 @@ __webpack_require__.r(__webpack_exports__);
       wins: 0,
       loses: 0,
       win: true,
-      showMessageWin: false
+      showMessageWin: false,
+      heroClassLose: "",
+      enemyClassLose: "",
+      heroHit: "",
+      enemyHit: "",
+      hideHeroChoose: "",
+      hideEnemyChoose: "",
+      blockHitButton: false,
+      randomEnemySelection: 0
     };
   },
   mounted: function mounted() {
@@ -6135,6 +6150,7 @@ __webpack_require__.r(__webpack_exports__);
       selectFighter.volume = 0.3;
       selectFighter.play();
       this.selectedFighter = item;
+      this.selectRandomEnemy(this.fighters);
     },
     selectEnemy: function selectEnemy(item) {
       var selectFighter = document.getElementById("selectFighter");
@@ -6142,8 +6158,51 @@ __webpack_require__.r(__webpack_exports__);
       selectFighter.play();
       this.selectedEnemy = item;
       this.initStats();
+      this.hideEnemyChoose = "hideElements";
+      this.hideHeroChoose = "hideElements";
+    },
+    selectRandomEnemy: function selectRandomEnemy(fighters) {
+      var _this2 = this;
+
+      var randomEnemy = document.getElementById("randomEnemy");
+      randomEnemy.volume = 0.2; //randomEnemy.play();
+
+      var i = 0;
+      var count = 0;
+      var reach = this.randomEnemy = Math.floor(Math.random() * (10 - 1 + 1) + 1);
+      var ramdonselect = setInterval(function () {
+        //this.randomEnemy = Math.floor(Math.random()*(3-0+0)+0)
+        var id = 'enemy' + i;
+        var element = document.getElementById(id);
+        element.classList.add("change");
+        randomEnemy.play();
+        setTimeout(function () {
+          element.classList.remove("change");
+        }, 50);
+        i++;
+
+        if (i > 3) {
+          i = 0;
+        }
+
+        count++;
+
+        if (count == reach) {
+          _this2.selectedEnemy = _this2.fighters[i];
+          clearInterval(ramdonselect);
+          selectFighter.play();
+
+          _this2.initStats();
+
+          _this2.hideEnemyChoose = "hideElements";
+          _this2.hideHeroChoose = "hideElements";
+        }
+      }, 100);
     },
     hitEnemy: function hitEnemy() {
+      var _this3 = this;
+
+      this.blockHitButton = true;
       var audioPunch = document.getElementById("audioPunch");
       audioPunch.volume = 0.3;
       audioPunch.play();
@@ -6155,29 +6214,42 @@ __webpack_require__.r(__webpack_exports__);
       var damageEnemy = 0;
       damageHero = Math.floor(this.heroStrength - this.enemyDef + Math.random() * (this.heroStrength - this.enemyDef));
       this.currentEnemyHealth = this.currentEnemyHealth - 100 * damageHero / this.enemyHealth;
+      this.enemyHit = "hittedEnemy";
+      setTimeout(function () {
+        _this3.enemyHit = "";
+      }, 100);
 
       if (this.currentEnemyHealth < 0) {
         this.currentEnemyHealth = 0;
-        this.$swal('You Win');
-        this.initStats();
-        this.selectedFighter = {};
-        this.selectedEnemy = {};
+        this.win = true;
+        this.showMessageWin = true;
         this.wins = this.wins + 1;
+        this.enemyClassLose = "whenLose";
         enemyDeath.play();
+        die();
       }
 
-      damageEnemy = Math.floor(this.enemyStrength - this.heroDef + Math.random() * (this.enemyStrength - this.heroDef));
-      this.currentHeroHealth = this.currentHeroHealth - 100 * damageEnemy / this.heroHealth;
+      setTimeout(function () {
+        audioPunch.play();
+        damageEnemy = Math.floor(_this3.enemyStrength - _this3.heroDef + Math.random() * (_this3.enemyStrength - _this3.heroDef));
+        _this3.currentHeroHealth = _this3.currentHeroHealth - 100 * damageEnemy / _this3.heroHealth;
+        _this3.heroHit = "hittedEnemy";
+        setTimeout(function () {
+          _this3.heroHit = "";
+        }, 100);
 
-      if (this.currentHeroHealth < 0) {
-        this.currentHeroHealth = 0;
-        this.$swal('You Lose');
-        this.initStats();
-        this.selectedFighter = {};
-        this.selectedEnemy = {};
-        this.loses = this.loses + 1;
-        heroDeath.play();
-      }
+        if (_this3.currentHeroHealth < 0) {
+          _this3.currentHeroHealth = 0;
+          _this3.win = false;
+          _this3.showMessageWin = true;
+          _this3.loses = _this3.loses + 1;
+          _this3.heroClassLose = "whenLose";
+          heroDeath.play();
+          die();
+        }
+
+        _this3.blockHitButton = false;
+      }, 500);
     },
     initStats: function initStats() {
       this.heroHealth = 1000;
@@ -6188,6 +6260,17 @@ __webpack_require__.r(__webpack_exports__);
       this.enemyDef = 100;
       this.heroStrength = 140;
       this.enemyStrength = 150;
+    },
+    leaveFight: function leaveFight() {
+      this.initStats();
+      this.selectedFighter = {};
+      this.selectedEnemy = {};
+      this.win = false;
+      this.showMessageWin = false;
+      this.heroClassLose = "";
+      this.enemyClassLose = "";
+      this.hideEnemyChoose = "";
+      this.hideHeroChoose = "";
     }
   },
   created: function created() {
@@ -27957,7 +28040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.game-canvas[data-v-5cec6160]{\r\n    width: 340px;\r\n    height: 192px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: scale(1);\n}\n.game-canvas canvas[data-v-5cec6160]{\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n        image-rendering: -moz-crisp-edges;\r\n        image-rendering: pixelated;\n}\n.listInstructions[data-v-5cec6160]{\r\n    list-style: none;\n}\nh1[data-v-5cec6160], p[data-v-5cec6160]{\r\n    color: white;\n}\n.fighter[data-v-5cec6160]{\r\n    cursor: pointer;\n}\n.fighter >  img[data-v-5cec6160]{\r\n    width: 40px;\n}\n.fighter[data-v-5cec6160]:hover{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterActive[data-v-5cec6160]{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterName[data-v-5cec6160]{\r\n    font-size: 10px;\n}\n.heroFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\n.enemyFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\r\n\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.game-canvas[data-v-5cec6160]{\r\n    width: 340px;\r\n    height: 192px;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    transform: scale(1);\n}\n.game-canvas canvas[data-v-5cec6160]{\r\n    -ms-interpolation-mode: nearest-neighbor;\r\n        image-rendering: -moz-crisp-edges;\r\n        image-rendering: pixelated;\n}\n.listInstructions[data-v-5cec6160]{\r\n    list-style: none;\n}\nh1[data-v-5cec6160], p[data-v-5cec6160]{\r\n    color: white;\n}\n.fighter[data-v-5cec6160]{\r\n    cursor: pointer;\n}\n.fighter >  img[data-v-5cec6160]{\r\n    width: 40px;\n}\n.fighter[data-v-5cec6160]:hover{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterActive[data-v-5cec6160]{\r\n    background-color: rgb(186, 186, 186);\n}\n.fighterName[data-v-5cec6160]{\r\n    font-size: 10px;\n}\n.heroFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\n.enemyFrame img[data-v-5cec6160]{\r\n    width: 100px;\n}\n.whenLose[data-v-5cec6160]{\r\n    filter: grayscale(100%); /* IE 9 */\r\n    transform: rotate(90deg);\n}\n.hittedEnemy[data-v-5cec6160]{\r\n    -webkit-animation: shake-data-v-5cec6160 0.5s;\r\n            animation: shake-data-v-5cec6160 0.5s;\n}\n.hideElements[data-v-5cec6160]{\r\n    display:none;\n}\n.change[data-v-5cec6160]{\r\n    background-color: rgb(186, 186, 186);\n}\n@-webkit-keyframes shake-data-v-5cec6160 {\n0% { transform: translate(1px, 1px) rotate(0deg);\n}\n10% { transform: translate(-1px, -2px) rotate(-1deg);\n}\n20% { transform: translate(-3px, 0px) rotate(1deg);\n}\n30% { transform: translate(3px, 2px) rotate(0deg);\n}\n40% { transform: translate(1px, -1px) rotate(1deg);\n}\n50% { transform: translate(-1px, 2px) rotate(-1deg);\n}\n60% { transform: translate(-3px, 1px) rotate(0deg);\n}\n70% { transform: translate(3px, 1px) rotate(-1deg);\n}\n80% { transform: translate(-1px, -1px) rotate(1deg);\n}\n90% { transform: translate(1px, 2px) rotate(0deg);\n}\n100% { transform: translate(1px, -2px) rotate(-1deg);\n}\n}\n@keyframes shake-data-v-5cec6160 {\n0% { transform: translate(1px, 1px) rotate(0deg);\n}\n10% { transform: translate(-1px, -2px) rotate(-1deg);\n}\n20% { transform: translate(-3px, 0px) rotate(1deg);\n}\n30% { transform: translate(3px, 2px) rotate(0deg);\n}\n40% { transform: translate(1px, -1px) rotate(1deg);\n}\n50% { transform: translate(-1px, 2px) rotate(-1deg);\n}\n60% { transform: translate(-3px, 1px) rotate(0deg);\n}\n70% { transform: translate(3px, 1px) rotate(-1deg);\n}\n80% { transform: translate(-1px, -1px) rotate(1deg);\n}\n90% { transform: translate(1px, 2px) rotate(0deg);\n}\n100% { transform: translate(1px, -2px) rotate(-1deg);\n}\n}\r\n\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -69496,6 +69579,7 @@ var render = function () {
                       "div",
                       {
                         staticClass: "enemyFrame",
+                        class: [_vm.enemyClassLose, _vm.enemyHit],
                         staticStyle: { "margin-top": "30px" },
                       },
                       [_c("img", { attrs: { src: _vm.selectedEnemy.sprite } })]
@@ -69505,9 +69589,18 @@ var render = function () {
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col" }, [
-                    _c("div", { staticClass: "heroFrame" }, [
-                      _c("img", { attrs: { src: _vm.selectedFighter.sprite } }),
-                    ]),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "heroFrame",
+                        class: [_vm.heroClassLose, _vm.heroHit],
+                      },
+                      [
+                        _c("img", {
+                          attrs: { src: _vm.selectedFighter.sprite },
+                        }),
+                      ]
+                    ),
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "col" }, [
@@ -69515,6 +69608,8 @@ var render = function () {
                       "button",
                       {
                         staticClass: "btn btn-success",
+                        staticStyle: { "margin-top": "20px" },
+                        attrs: { disabled: _vm.blockHitButton },
                         on: {
                           click: function ($event) {
                             return _vm.hitEnemy()
@@ -69529,7 +69624,25 @@ var render = function () {
                     ),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col" }),
+                  _c("div", { staticClass: "col" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning",
+                        staticStyle: { "margin-top": "20px" },
+                        on: {
+                          click: function ($event) {
+                            return _vm.leaveFight()
+                          },
+                        },
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Leave\n                    "
+                        ),
+                      ]
+                    ),
+                  ]),
                 ]),
               ]
             )
@@ -69558,75 +69671,86 @@ var render = function () {
         ]),
         _vm._v(" "),
         _vm.startFight == true
-          ? _c("div", { staticClass: "col text-center" }, [
-              _c("h1", [_vm._v("Choose your fighter")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "row fighters" },
-                _vm._l(_vm.fighters, function (item, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: index,
-                      staticClass: "col-sm-3 fighter",
-                      class:
-                        _vm.selectedFighter.id == item.id
-                          ? "fighterActive"
-                          : "",
-                      on: {
-                        click: function ($event) {
-                          return _vm.selectFighter(item)
+          ? _c(
+              "div",
+              { staticClass: "col text-center", class: _vm.hideHeroChoose },
+              [
+                _c("h1", [_vm._v("Choose your fighter")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row fighters" },
+                  _vm._l(_vm.fighters, function (item, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "col-sm-3 fighter",
+                        class:
+                          _vm.selectedFighter.id == item.id
+                            ? "fighterActive"
+                            : "",
+                        on: {
+                          click: function ($event) {
+                            return _vm.selectFighter(item)
+                          },
                         },
                       },
-                    },
-                    [
-                      _c("img", { attrs: { src: item.sprite } }),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "fighterName" }, [
-                        _vm._v(_vm._s(item.name)),
-                      ]),
-                    ]
-                  )
-                }),
-                0
-              ),
-            ])
+                      [
+                        _c("img", { attrs: { src: item.sprite } }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "fighterName" }, [
+                          _vm._v(_vm._s(item.name)),
+                        ]),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm.selectedFighter.id
-          ? _c("div", { staticClass: "col text-center" }, [
-              _c("h1", [_vm._v("Choose an enemy")]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "row fighters" },
-                _vm._l(_vm.fighters, function (item, index) {
-                  return _c(
-                    "div",
-                    {
-                      key: index,
-                      staticClass: "col-sm-3 fighter",
-                      class:
-                        _vm.selectedEnemy.id == item.id ? "fighterActive" : "",
-                      on: {
-                        click: function ($event) {
-                          return _vm.selectEnemy(item)
+          ? _c(
+              "div",
+              { staticClass: "col text-center", class: _vm.hideEnemyChoose },
+              [
+                _c("h1", [_vm._v("Choose an enemy")]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "row fighters" },
+                  _vm._l(_vm.fighters, function (item, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "col-sm-3 fighter enemyChoose",
+                        class:
+                          _vm.selectedEnemy.id == item.id
+                            ? "fighterActive"
+                            : "",
+                        attrs: { id: "enemy" + index },
+                        on: {
+                          click: function ($event) {
+                            return _vm.selectEnemy(item)
+                          },
                         },
                       },
-                    },
-                    [
-                      _c("img", { attrs: { src: item.sprite } }),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "fighterName" }, [
-                        _vm._v(_vm._s(item.name)),
-                      ]),
-                    ]
-                  )
-                }),
-                0
-              ),
-            ])
+                      [
+                        _c("img", { attrs: { src: item.sprite } }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "fighterName" }, [
+                          _vm._v(_vm._s(item.name)),
+                        ]),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+              ]
+            )
           : _vm._e(),
         _vm._v(" "),
         _vm._m(2),
@@ -69695,6 +69819,15 @@ var render = function () {
           src: "/songs/sfx_movement_portal3.wav",
           preload: "",
           id: "selectFighter",
+        },
+      }),
+      _vm._v(" "),
+      _c("audio", {
+        ref: "audio",
+        attrs: {
+          src: "/songs/sfx_weapon_singleshot2.wav",
+          preload: "",
+          id: "randomEnemy",
         },
       }),
     ]

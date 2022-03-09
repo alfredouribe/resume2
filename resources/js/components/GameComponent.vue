@@ -27,26 +27,26 @@
                         <h1 class="text-danger" v-if="win == false && showMessageWin == true">LOSE</h1>
                     </div>
                     <div class="col">
-                        
-
-                        <div class="enemyFrame" style="margin-top:30px">
+                        <div class="enemyFrame" style="margin-top:30px" :class="[enemyClassLose, enemyHit]">
                             <img :src="selectedEnemy.sprite">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="heroFrame">
+                        <div class="heroFrame" :class="[heroClassLose, heroHit]">
                             <img :src="selectedFighter.sprite">
                         </div>
                     </div>
                     <div class="col">
-                        <button class="btn btn-success" @click="hitEnemy()">
+                        <button class="btn btn-success" @click="hitEnemy()" style="margin-top: 20px" :disabled="blockHitButton">
                             Hit
                         </button>
                     </div>
                     <div class="col">
-                        
+                        <button class="btn btn-warning" @click="leaveFight()" style="margin-top: 20px">
+                            Leave
+                        </button>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                 </ul>
             </div>
 
-            <div class="col text-center" v-if="startFight == true">
+            <div class="col text-center" v-if="startFight == true" :class="hideHeroChoose">
                 <h1>Choose your fighter</h1>
                 <div class="row fighters">
                     <div class="col-sm-3 fighter" v-for="(item, index) in fighters" :key="index" @click="selectFighter(item)" :class="selectedFighter.id==item.id ? 'fighterActive': ''">
@@ -79,10 +79,10 @@
                 </div>
             </div>
 
-            <div class="col text-center" v-if="selectedFighter.id">
+            <div class="col text-center" v-if="selectedFighter.id" :class="hideEnemyChoose">
                 <h1>Choose an enemy</h1>
                 <div class="row fighters">
-                    <div class="col-sm-3 fighter" v-for="(item, index) in fighters" :key="index" @click="selectEnemy(item)" :class="selectedEnemy.id==item.id ? 'fighterActive': ''">
+                    <div class="col-sm-3 fighter enemyChoose" v-for="(item, index) in fighters" :key="index" @click="selectEnemy(item)" :id="'enemy'+index" :class="selectedEnemy.id==item.id ? 'fighterActive': ''">
                         <img :src="item.sprite">
                         <p class="fighterName">{{item.name}}</p>
                     </div>
@@ -142,6 +142,13 @@
             preload
             id="selectFighter"
         ></audio>
+
+        <audio
+            ref="audio"
+            src="/songs/sfx_weapon_singleshot2.wav"
+            preload
+            id="randomEnemy"
+        ></audio>
     </div>
 </template>
 
@@ -175,7 +182,15 @@
                 wins: 0,
                 loses: 0,
                 win: true,
-                showMessageWin: false
+                showMessageWin: false,
+                heroClassLose: "",
+                enemyClassLose: "",
+                heroHit: "",
+                enemyHit: "",
+                hideHeroChoose: "",
+                hideEnemyChoose: "",
+                blockHitButton: false,
+                randomEnemySelection: 0
             }
         },
         mounted(){
@@ -366,6 +381,7 @@
                 selectFighter.volume = 0.3
                 selectFighter.play()
                 this.selectedFighter = item;
+                this.selectRandomEnemy(this.fighters);
             },
             selectEnemy(item){
                 var selectFighter = document.getElementById("selectFighter");
@@ -373,8 +389,52 @@
                 selectFighter.play()
                 this.selectedEnemy = item;
                 this.initStats();
+                this.hideEnemyChoose = "hideElements";
+                this.hideHeroChoose = "hideElements";
+            },
+            selectRandomEnemy(fighters){
+                var randomEnemy = document.getElementById("randomEnemy");
+                randomEnemy.volume = 0.2
+
+                //randomEnemy.play();
+                var i = 0;
+                var count = 0;
+                var reach = this.randomEnemy = Math.floor(Math.random()*(10-1+1)+1);
+                
+                var ramdonselect = setInterval(()=>{
+                    //this.randomEnemy = Math.floor(Math.random()*(3-0+0)+0)
+
+                    let id = 'enemy'+i
+                    var element = document.getElementById(id);
+                    element.classList.add("change");
+                    randomEnemy.play()
+                    
+                    setTimeout(()=>{
+                        element.classList.remove("change");
+                    },50)
+                    
+                    
+                    i++;
+
+                    if(i>3){
+                        i = 0;
+                    }
+
+                    count++
+
+                    if(count == reach){
+                        this.selectedEnemy = this.fighters[i];
+                        clearInterval(ramdonselect)
+                        selectFighter.play()
+                        this.initStats();
+                        this.hideEnemyChoose = "hideElements";
+                        this.hideHeroChoose = "hideElements";
+                    }
+                }, 100)
+
             },
             hitEnemy(){
+                this.blockHitButton = true
                 var audioPunch = document.getElementById("audioPunch");
                 audioPunch.volume = 0.3
                 audioPunch.play();
@@ -393,31 +453,41 @@
 
 
                 this.currentEnemyHealth = this.currentEnemyHealth  - (100 * damageHero / this.enemyHealth  );
-
+                this.enemyHit = "hittedEnemy";
+                setTimeout(()=>{
+                    this.enemyHit = "";
+                }, 100);
                 if(this.currentEnemyHealth < 0){
                     this.currentEnemyHealth = 0;
-                    this.$swal('You Win');
-                    this.initStats();
-                    this.selectedFighter = {};
-                    this.selectedEnemy = {};
+                    this.win = true;
+                    this.showMessageWin = true;
                     this.wins = this.wins+1;
-                    enemyDeath.play()
+                    this.enemyClassLose = "whenLose";
                     
+                    enemyDeath.play()
+                    die();
                 }
+                
+                setTimeout(()=>{
+                    audioPunch.play();
+                    damageEnemy = Math.floor( (this.enemyStrength - this.heroDef) + (Math.random() * (this.enemyStrength - this.heroDef)));
 
-                damageEnemy = Math.floor( (this.enemyStrength - this.heroDef) + (Math.random() * (this.enemyStrength - this.heroDef)));
-
-                this.currentHeroHealth = this.currentHeroHealth  - (100 * damageEnemy / this.heroHealth  );
-
-                if(this.currentHeroHealth < 0){
-                    this.currentHeroHealth = 0;
-                    this.$swal('You Lose');
-                    this.initStats();
-                    this.selectedFighter = {};
-                    this.selectedEnemy = {};
-                    this.loses = this.loses+1;
-                    heroDeath.play()
-                }
+                    this.currentHeroHealth = this.currentHeroHealth  - (100 * damageEnemy / this.heroHealth  );
+                    this.heroHit = "hittedEnemy";
+                    setTimeout(()=>{
+                        this.heroHit = "";
+                    }, 100);
+                    if(this.currentHeroHealth < 0){
+                        this.currentHeroHealth = 0
+                        this.win = false
+                        this.showMessageWin = true
+                        this.loses = this.loses+1
+                        this.heroClassLose = "whenLose"
+                        heroDeath.play()
+                        die()
+                    }
+                    this.blockHitButton = false
+                }, 500)
             },
             initStats(){
                 
@@ -429,6 +499,17 @@
                 this.enemyDef = 100;
                 this.heroStrength = 140;
                 this.enemyStrength = 150;
+            },
+            leaveFight(){
+                this.initStats();
+                this.selectedFighter = {};
+                this.selectedEnemy = {};
+                this.win = false;
+                this.showMessageWin = false;
+                this.heroClassLose = "";
+                this.enemyClassLose = "";
+                this.hideEnemyChoose = "";
+                this.hideHeroChoose = "";
             }
         },
         created(){
@@ -520,6 +601,38 @@ h1, p{
 
 .enemyFrame img{
     width: 100px;
+}
+
+.whenLose{
+    filter: grayscale(100%);
+    -ms-transform: rotate(90deg); /* IE 9 */
+    transform: rotate(90deg);
+}
+
+.hittedEnemy{
+    animation: shake 0.5s;
+}
+
+.hideElements{
+    display:none;
+}
+
+.change{
+    background-color: rgb(186, 186, 186);
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
 </style>
