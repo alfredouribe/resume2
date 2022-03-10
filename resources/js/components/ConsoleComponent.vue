@@ -67,7 +67,9 @@
                 }else if(this.newCommand.command == "login"){
 
                     this.$refs.modalButton.click();
-
+                }else if(this.newCommand.command == "logout"){
+                    document.getElementById('logout-form').submit();
+                
                 }else{
                     axios.post('api/process_command', parameters)
                     .then(res => {
@@ -89,10 +91,9 @@
                     password: this.password
                 }
                 
-                axios.post('api/authenticate', parameters2)
-                .then(res => {
-                    console.log(res.data);
-                    this.commands.push(res.data);
+                axios.post('/login', parameters2)
+                .then(() => {
+                    location.reload();
                 })
             }
         }

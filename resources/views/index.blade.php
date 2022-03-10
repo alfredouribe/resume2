@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1 style='font-size:20px; color: #a9ced0' alt="Alfredo Uribe Resume">Alfredo Uribe Resume</h1>
+            <h1 style='font-size:20px; color: #a9ced0' alt="Alfredo Uribe Resume">Alfredo Uribe's Resume</h1>
         </div>
     </div>
     <div class="row">

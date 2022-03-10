@@ -5550,6 +5550,8 @@ __webpack_require__.r(__webpack_exports__);
         this.$root.consola = false;
       } else if (this.newCommand.command == "login") {
         this.$refs.modalButton.click();
+      } else if (this.newCommand.command == "logout") {
+        document.getElementById('logout-form').submit();
       } else {
         axios.post('api/process_command', parameters).then(function (res) {
           _this.commands.push(res.data);
@@ -5563,16 +5565,12 @@ __webpack_require__.r(__webpack_exports__);
       this.newCommand = {};
     },
     login: function login() {
-      var _this2 = this;
-
       var parameters2 = {
         email: this.email,
         password: this.password
       };
-      axios.post('api/authenticate', parameters2).then(function (res) {
-        console.log(res.data);
-
-        _this2.commands.push(res.data);
+      axios.post('/login', parameters2).then(function () {
+        location.reload();
       });
     }
   }
@@ -6226,7 +6224,7 @@ __webpack_require__.r(__webpack_exports__);
         this.wins = this.wins + 1;
         this.enemyClassLose = "whenLose";
         enemyDeath.play();
-        die();
+        return;
       }
 
       setTimeout(function () {
@@ -6245,7 +6243,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.loses = _this3.loses + 1;
           _this3.heroClassLose = "whenLose";
           heroDeath.play();
-          die();
+          return;
         }
 
         _this3.blockHitButton = false;
@@ -6260,6 +6258,7 @@ __webpack_require__.r(__webpack_exports__);
       this.enemyDef = 100;
       this.heroStrength = 140;
       this.enemyStrength = 150;
+      this.blockHitButton = false;
     },
     leaveFight: function leaveFight() {
       this.initStats();
@@ -6271,6 +6270,7 @@ __webpack_require__.r(__webpack_exports__);
       this.enemyClassLose = "";
       this.hideEnemyChoose = "";
       this.hideHeroChoose = "";
+      this.blockHitButton = false;
     }
   },
   created: function created() {
@@ -69510,8 +69510,7 @@ var render = function () {
               {
                 staticClass: "col",
                 staticStyle: {
-                  background:
-                    "url(https://cdn.wallpapersafari.com/41/30/KhfVCl.png)",
+                  background: "url(images/maps/backgroundbattle.png)",
                   "background-size": "100% 100%",
                 },
               },
@@ -69530,7 +69529,7 @@ var render = function () {
                     [
                       _c("div", { staticClass: "progress " }, [
                         _c("div", {
-                          staticClass: "progress-bar",
+                          staticClass: "progress-bar bg-danger",
                           style: "width: " + _vm.currentEnemyHealth + "%",
                           attrs: {
                             role: "progressbar",

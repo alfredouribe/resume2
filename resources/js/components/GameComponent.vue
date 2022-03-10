@@ -6,13 +6,13 @@
                 <canvas class="game-canvas" id="c"></canvas>
             </div>
 
-            <div class="col" style="background: url(https://cdn.wallpapersafari.com/41/30/KhfVCl.png); background-size: 100% 100%;" v-if="selectedEnemy.id > 0">
+            <div class="col" style="background: url(images/maps/backgroundbattle.png); background-size: 100% 100%;" v-if="selectedEnemy.id > 0">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col"></div>
                     <div class="col" style="padding-top:30px">
                         <div class="progress ">
-                            <div class="progress-bar" role="progressbar" :style="'width: '+currentEnemyHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="enemyHealth"></div>
+                            <div class="progress-bar bg-danger" role="progressbar" :style="'width: '+currentEnemyHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="enemyHealth"></div>
                         </div>
                     </div>
                 </div>
@@ -465,7 +465,7 @@
                     this.enemyClassLose = "whenLose";
                     
                     enemyDeath.play()
-                    die();
+                    return;
                 }
                 
                 setTimeout(()=>{
@@ -484,7 +484,7 @@
                         this.loses = this.loses+1
                         this.heroClassLose = "whenLose"
                         heroDeath.play()
-                        die()
+                        return;
                     }
                     this.blockHitButton = false
                 }, 500)
@@ -499,6 +499,7 @@
                 this.enemyDef = 100;
                 this.heroStrength = 140;
                 this.enemyStrength = 150;
+                this.blockHitButton = false;
             },
             leaveFight(){
                 this.initStats();
@@ -510,6 +511,7 @@
                 this.enemyClassLose = "";
                 this.hideEnemyChoose = "";
                 this.hideHeroChoose = "";
+                this.blockHitButton = false;
             }
         },
         created(){

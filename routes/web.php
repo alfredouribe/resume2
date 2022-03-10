@@ -19,10 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+Route::get('/index', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/commands', [App\Http\Controllers\CommandController::class, 'index'])->name('commands');
 
-//apis
-Route::get('get_resources',['App\Http\Controllers\ApiController', 'get_resources'])->name('get_resources');
-Route::post('add_command',['App\Http\Controllers\ApiController', 'add_command'])->name('add_command');

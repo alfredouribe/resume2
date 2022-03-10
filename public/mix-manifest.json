@@ -32,8 +32,10 @@
     "/songs/sfx_movement_footsteps1b.wav": "/songs/sfx_movement_footsteps1b.wav",
     "/songs/sfx_movement_portal2.wav": "/songs/sfx_movement_portal2.wav",
     "/songs/sfx_movement_portal3.wav": "/songs/sfx_movement_portal3.wav",
+    "/songs/sfx_vehicle_plainloop.wav": "/songs/sfx_vehicle_plainloop.wav",
+    "/songs/sfx_weapon_singleshot2.wav": "/songs/sfx_weapon_singleshot2.wav",
     "/songs/sfx_wpn_punch4.wav": "/songs/sfx_wpn_punch4.wav",
     "/songs/song.mp3": "/songs/song.mp3",
-    "/songs/sfx_vehicle_plainloop.wav": "/songs/sfx_vehicle_plainloop.wav",
-    "/songs/sfx_weapon_singleshot2.wav": "/songs/sfx_weapon_singleshot2.wav"
+    "/images/maps/backgroundbattle.png": "/images/maps/backgroundbattle.png",
+    "/images/maps/backgroundbattle.psd": "/images/maps/backgroundbattle.psd"
 }

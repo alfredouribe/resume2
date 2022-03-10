@@ -9,6 +9,7 @@ use App\Models\Command;
 
 class ApiController extends Controller
 {
+
     public function get_resources(Request $request){
         $memory = (memory_get_usage(true))/1048576;
 
@@ -73,7 +74,8 @@ class ApiController extends Controller
             'password' => $request->password
         ];
 
-        if(Auth::id()){
+        //var_dump(Auth::check());
+        if(Auth::check()){
             $response = [
                 "0"=> [
                     "command" => "You are already loged in",
@@ -81,11 +83,12 @@ class ApiController extends Controller
                 ]
             ];
         }else if(Auth::attempt($credentials)){
+        //if(Auth::attempt($credentials)){
             //return redirect()->intended('commands');
             $response = [
                 "0"=> [
-                    "command" => "success",
-                    "result" => "Now you can edit the commands"
+                    "command" => "Welcome " . Auth::user()->name,
+                    "result" => "Now you can edit the commands go to /commands",
                 ]
             ];
         }else{
