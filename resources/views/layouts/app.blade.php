@@ -3,11 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Alfredo Uribe. Alfredo Uribe is a Web Developer with 8 years of experience in PHP language, designing and programming websites with html5, css3, jquery, javascript, mysql, bootstrap and agile methodologies">
+    <meta name="author" content="Francisco Alfredo Uribe Sanchez">
+    <meta name="keywords" content="Alfredo Uribe, Senior Php Developer, php developer roles and responsibilities, php freelancer, developer, coder with php, php laravel developer, cv php developer, php senior developer, php developer experience resume">
+    <meta name="theme-color">
+
+    <meta property="og:url" content="https://alfredouribe.com/" />
+    <meta property="og:type" content="website" /> 
+    <meta property="og:title" content="Alfredo Uribe - Resume Commands Console Version">
+    <meta property="og:description" content="Web Developer with 8 years of experience in PHP language, designing and programming websites, ERP, CMS with html5, css3, jquery, javascript, mysql, bootstrap and agile methodologies" />
+    <meta property="og:image" content="images/alfredouribe_facebook.png">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ "Alfredo Uribe's Resume" }}</title>
+    <title>{{ "Alfredo Uribe" }} (A Resume As Never Seen)</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -28,7 +38,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="display: none">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ "Alfredo Uribe's Resume" }}
+                    {{ "Alfredo Uribe" }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

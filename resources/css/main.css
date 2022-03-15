@@ -1,8 +1,5 @@
 body{
     background: #05080d;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .personalData{
@@ -17,11 +14,21 @@ h2{
     font-size:14px;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: bold;
-    color: #4c5c60;
+    color: #ffffff;
+}
+
+p{
+  color: #ffffff;
 }
 
 a, .labelCode{
-    color: #a9ced0;
+    color: #c7cfd0;
+}
+
+a:hover{
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
 }
 
 .consoleSection{
@@ -35,7 +42,7 @@ a, .labelCode{
 .contentCode{
     /* background-color: #000; */
     border: none;
-    color: #a9ced0;
+    color: #c7cfd0;
     font-family: 'Inconsolata', monospace;
     font-size: 12px;
 }
@@ -43,7 +50,7 @@ a, .labelCode{
 .textCommand{
     background-color: rgba(0,0,0,0);
     border: none;
-    color: #a9ced0;
+    color: #c7cfd0;
     font-family: 'Inconsolata', monospace;
     font-size: 13px;
     width: 70%;
@@ -75,7 +82,7 @@ a, .labelCode{
   
   /* Track */
   ::-webkit-scrollbar-track {
-    background: #a9ced0; 
+    background: #c7cfd0; 
   }
    
   /* Handle */
@@ -95,7 +102,7 @@ a, .labelCode{
     height: 300px;
     display: grid;
     gap: 2px;
-    color: #a9ced0;
+    color: #c7cfd0;
   }
   
   .keyboard__row {

@@ -12,6 +12,8 @@
     "/webfonts/fa-solid-900.woff2": "/webfonts/fa-solid-900.woff2",
     "/webfonts/fa-v4compatibility.ttf": "/webfonts/fa-v4compatibility.ttf",
     "/webfonts/fa-v4compatibility.woff2": "/webfonts/fa-v4compatibility.woff2",
+    "/images/maps/backgroundbattle.png": "/images/maps/backgroundbattle.png",
+    "/images/maps/backgroundbattle.psd": "/images/maps/backgroundbattle.psd",
     "/images/maps/map.gif": "/images/maps/map.gif",
     "/images/maps/map.psd": "/images/maps/map.psd",
     "/images/maps/scene0.gif": "/images/maps/scene0.gif",
@@ -35,7 +37,5 @@
     "/songs/sfx_vehicle_plainloop.wav": "/songs/sfx_vehicle_plainloop.wav",
     "/songs/sfx_weapon_singleshot2.wav": "/songs/sfx_weapon_singleshot2.wav",
     "/songs/sfx_wpn_punch4.wav": "/songs/sfx_wpn_punch4.wav",
-    "/songs/song.mp3": "/songs/song.mp3",
-    "/images/maps/backgroundbattle.png": "/images/maps/backgroundbattle.png",
-    "/images/maps/backgroundbattle.psd": "/images/maps/backgroundbattle.psd"
+    "/songs/song.mp3": "/songs/song.mp3"
 }

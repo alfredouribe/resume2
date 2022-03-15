@@ -5,7 +5,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1 style='font-size:20px; color: #a9ced0' alt="Alfredo Uribe Resume">Alfredo Uribe's Resume</h1>
+            <h1 style='font-size:20px; color: #a9ced0' alt="Alfredo Uribe">Alfredo Uribe (A Resume as Never Seen)</h1>
         </div>
     </div>
     <div class="row">
@@ -19,6 +19,13 @@
                 <consolecomponent v-if="consola == true"></consolecomponent>
                 <gamecomponent v-if="consola == false"></gamecomponent>
             </div>
+
+            <div class="row">
+                <div class="col d-flex align-items-end justify-content-center">
+                    <keyboardcomponent></keyboardcomponent>
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-2 col-sm-12">
@@ -38,11 +45,6 @@
 
         
 
-    </div>
-    <div class="row">
-        <div class="col d-flex align-items-end justify-content-center">
-            <keyboardcomponent></keyboardcomponent>
-        </div>
     </div>
 
 </div>

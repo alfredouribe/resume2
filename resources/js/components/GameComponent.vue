@@ -594,7 +594,7 @@ h1, p{
 }
 
 .fighterName{
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .heroFrame img{
