@@ -12,6 +12,8 @@
         <div class="col-md-2 col-sm-12 personalData">
             
             <infocomponent></infocomponent>
+
+            <carcomponent></carcomponent>
         </div>
 
         <div class="col-md-8 col-sm-12">
@@ -48,9 +50,6 @@
                 <small>this is not real information</small>
             </div>
         </div>
-
-        
-
     </div>
 
 </div>

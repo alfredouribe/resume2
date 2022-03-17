@@ -29,6 +29,7 @@ Vue.component('worldcomponent', require('./components/WorldComponent.vue').defau
 Vue.component('commandscomponent', require('./components/CommandsComponent.vue').default);
 Vue.component('gamecomponent', require('./components/GameComponent.vue').default);
 Vue.component('fightercomponent', require('./components/FighterComponent.vue').default);
+Vue.component('carcomponent', require('./components/CarComponent.vue').default);
 
 /** Sweet Alert **/
 // main.js
@@ -39,6 +40,13 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueSweetalert2);
+
+
+//import vue 360
+import VueThreeSixty from 'vue-360'
+import 'vue-360/dist/css/style.css'
+
+Vue.use(VueThreeSixty)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
