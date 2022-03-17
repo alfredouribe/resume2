@@ -12,29 +12,31 @@
                     <div class="col"></div>
                     <div class="col" style="padding-top:30px">
                         <div class="progress ">
-                            <div class="progress-bar bg-danger" role="progressbar" :style="'width: '+currentEnemyHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="enemyHealth"></div>
+                            <div class="progress-bar bg-danger" role="progressbar" :style="'width: '+currentEnemyHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="enemyHealth">{{enemyHealthMinus}} / {{enemyHealth}}</div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" :style="'width: '+currentHeroHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="heroHealth"></div>
+                            <div class="progress-bar" role="progressbar" :style="'width: '+currentHeroHealth+'%'" aria-valuenow="100" aria-valuemin="0" :aria-valuemax="heroHealth">{{heroHealthMinus}} / {{heroHealth}}</div>
                         </div>
                     </div>
                     <div class="col text-center">
                         <h1 class="text-success" v-if="win == true && showMessageWin == true">WIN</h1>
                         <h1 class="text-danger" v-if="win == false && showMessageWin == true">LOSE</h1>
                     </div>
-                    <div class="col">
-                        <div class="enemyFrame" style="margin-top:30px" :class="[enemyClassLose, enemyHit]">
+                    <div class="col text-center">
+                        <div class="enemyFrame text-center" style="margin-top:30px" :class="[enemyClassLose, enemyHit]">
+                            <span class="text-danger">-{{damageHeroToEnemy}}</span>
                             <img :src="selectedEnemy.sprite">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="heroFrame" :class="[heroClassLose, heroHit]">
+                        <div class="heroFrame text-center" :class="[heroClassLose, heroHit]">
+                            <span class="text-danger">-{{damageEnemyToHero}}</span>
                             <img :src="selectedFighter.sprite">
                         </div>
                     </div>
@@ -172,7 +174,9 @@
                 selectedFighter: {},
                 selectedEnemy: {},
                 heroHealth: 0,
+                heroHealthMinus: 0,
                 enemyHealth: 0,
+                enemyHealthMinus: 0,
                 currentHeroHealth: 0,
                 currentEnemyHealth: 0,
                 heroDef: 0,
@@ -190,7 +194,9 @@
                 hideHeroChoose: "",
                 hideEnemyChoose: "",
                 blockHitButton: false,
-                randomEnemySelection: 0
+                randomEnemySelection: 0,
+                damageHeroToEnemy: "",
+                damageEnemyToHero: ""
             }
         },
         mounted(){
@@ -450,8 +456,8 @@
                 let damageEnemy = 0;
 
                 damageHero = Math.floor( (this.heroStrength - this.enemyDef) + (Math.random() * (this.heroStrength - this.enemyDef)));
-
-
+                this.damageHeroToEnemy = damageHero
+                this.enemyHealthMinus = this.enemyHealthMinus - damageHero;
                 this.currentEnemyHealth = this.currentEnemyHealth  - (100 * damageHero / this.enemyHealth  );
                 this.enemyHit = "hittedEnemy";
                 setTimeout(()=>{
@@ -471,7 +477,8 @@
                 setTimeout(()=>{
                     audioPunch.play();
                     damageEnemy = Math.floor( (this.enemyStrength - this.heroDef) + (Math.random() * (this.enemyStrength - this.heroDef)));
-
+                    this.damageEnemyToHero = damageEnemy;
+                    this.heroHealthMinus = this.heroHealthMinus - damageEnemy;
                     this.currentHeroHealth = this.currentHeroHealth  - (100 * damageEnemy / this.heroHealth  );
                     this.heroHit = "hittedEnemy";
                     setTimeout(()=>{
@@ -487,12 +494,16 @@
                         return;
                     }
                     this.blockHitButton = false
+                    
                 }, 500)
+                
             },
             initStats(){
                 
                 this.heroHealth = 1000;
+                this.heroHealthMinus = 1000;
                 this.enemyHealth = 1000;
+                this.enemyHealthMinus = 1000;
                 this.currentHeroHealth = 100;
                 this.currentEnemyHealth = 100;
                 this.heroDef = 110;
@@ -500,6 +511,8 @@
                 this.heroStrength = 140;
                 this.enemyStrength = 150;
                 this.blockHitButton = false;
+                this.damageHeroToEnemy = ""
+                this.damageEnemyToHero = ""
             },
             leaveFight(){
                 this.initStats();

@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Alfredo Uribe. Alfredo Uribe is a Web Developer with 8 years of experience in PHP language, designing and programming websites with html5, css3, jquery, javascript, mysql, bootstrap and agile methodologies">
+    <meta name="description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies">
     <meta name="author" content="Francisco Alfredo Uribe Sanchez">
-    <meta name="keywords" content="Alfredo Uribe, Senior Php Developer, php developer roles and responsibilities, php freelancer, developer, coder with php, php laravel developer, cv php developer, php senior developer, php developer experience resume">
+    <meta name="keywords" content="Alfredo Uribe, senior fullstack Developer, fullstack developer roles and responsibilities, web freelancer, developer, coder, laravel developer, cv developer, web senior developer, developer experience resume">
     <meta name="theme-color">
 
     <meta property="og:url" content="https://alfredouribe.com/" />
     <meta property="og:type" content="website" /> 
     <meta property="og:title" content="Alfredo Uribe - Resume Commands Console Version">
-    <meta property="og:description" content="Web Developer with 8 years of experience in PHP language, designing and programming websites, ERP, CMS with html5, css3, jquery, javascript, mysql, bootstrap and agile methodologies" />
+    <meta property="og:description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies" />
     <meta property="og:image" content="images/alfredouribe_facebook.png">
 
     <!-- CSRF Token -->

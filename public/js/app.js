@@ -5931,6 +5931,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -5949,7 +5951,9 @@ __webpack_require__.r(__webpack_exports__);
       selectedFighter: {},
       selectedEnemy: {},
       heroHealth: 0,
+      heroHealthMinus: 0,
       enemyHealth: 0,
+      enemyHealthMinus: 0,
       currentHeroHealth: 0,
       currentEnemyHealth: 0,
       heroDef: 0,
@@ -5967,7 +5971,9 @@ __webpack_require__.r(__webpack_exports__);
       hideHeroChoose: "",
       hideEnemyChoose: "",
       blockHitButton: false,
-      randomEnemySelection: 0
+      randomEnemySelection: 0,
+      damageHeroToEnemy: "",
+      damageEnemyToHero: ""
     };
   },
   mounted: function mounted() {
@@ -6211,6 +6217,8 @@ __webpack_require__.r(__webpack_exports__);
       var damageHero = 0;
       var damageEnemy = 0;
       damageHero = Math.floor(this.heroStrength - this.enemyDef + Math.random() * (this.heroStrength - this.enemyDef));
+      this.damageHeroToEnemy = damageHero;
+      this.enemyHealthMinus = this.enemyHealthMinus - damageHero;
       this.currentEnemyHealth = this.currentEnemyHealth - 100 * damageHero / this.enemyHealth;
       this.enemyHit = "hittedEnemy";
       setTimeout(function () {
@@ -6230,6 +6238,8 @@ __webpack_require__.r(__webpack_exports__);
       setTimeout(function () {
         audioPunch.play();
         damageEnemy = Math.floor(_this3.enemyStrength - _this3.heroDef + Math.random() * (_this3.enemyStrength - _this3.heroDef));
+        _this3.damageEnemyToHero = damageEnemy;
+        _this3.heroHealthMinus = _this3.heroHealthMinus - damageEnemy;
         _this3.currentHeroHealth = _this3.currentHeroHealth - 100 * damageEnemy / _this3.heroHealth;
         _this3.heroHit = "hittedEnemy";
         setTimeout(function () {
@@ -6251,7 +6261,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     initStats: function initStats() {
       this.heroHealth = 1000;
+      this.heroHealthMinus = 1000;
       this.enemyHealth = 1000;
+      this.enemyHealthMinus = 1000;
       this.currentHeroHealth = 100;
       this.currentEnemyHealth = 100;
       this.heroDef = 110;
@@ -6259,6 +6271,8 @@ __webpack_require__.r(__webpack_exports__);
       this.heroStrength = 140;
       this.enemyStrength = 150;
       this.blockHitButton = false;
+      this.damageHeroToEnemy = "";
+      this.damageEnemyToHero = "";
     },
     leaveFight: function leaveFight() {
       this.initStats();
@@ -6317,8 +6331,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -69605,16 +69617,26 @@ var render = function () {
                     },
                     [
                       _c("div", { staticClass: "progress " }, [
-                        _c("div", {
-                          staticClass: "progress-bar bg-danger",
-                          style: "width: " + _vm.currentEnemyHealth + "%",
-                          attrs: {
-                            role: "progressbar",
-                            "aria-valuenow": "100",
-                            "aria-valuemin": "0",
-                            "aria-valuemax": _vm.enemyHealth,
+                        _c(
+                          "div",
+                          {
+                            staticClass: "progress-bar bg-danger",
+                            style: "width: " + _vm.currentEnemyHealth + "%",
+                            attrs: {
+                              role: "progressbar",
+                              "aria-valuenow": "100",
+                              "aria-valuemin": "0",
+                              "aria-valuemax": _vm.enemyHealth,
+                            },
                           },
-                        }),
+                          [
+                            _vm._v(
+                              _vm._s(_vm.enemyHealthMinus) +
+                                " / " +
+                                _vm._s(_vm.enemyHealth)
+                            ),
+                          ]
+                        ),
                       ]),
                     ]
                   ),
@@ -69623,16 +69645,26 @@ var render = function () {
                 _c("div", { staticClass: "row" }, [
                   _c("div", { staticClass: "col" }, [
                     _c("div", { staticClass: "progress" }, [
-                      _c("div", {
-                        staticClass: "progress-bar",
-                        style: "width: " + _vm.currentHeroHealth + "%",
-                        attrs: {
-                          role: "progressbar",
-                          "aria-valuenow": "100",
-                          "aria-valuemin": "0",
-                          "aria-valuemax": _vm.heroHealth,
+                      _c(
+                        "div",
+                        {
+                          staticClass: "progress-bar",
+                          style: "width: " + _vm.currentHeroHealth + "%",
+                          attrs: {
+                            role: "progressbar",
+                            "aria-valuenow": "100",
+                            "aria-valuemin": "0",
+                            "aria-valuemax": _vm.heroHealth,
+                          },
                         },
-                      }),
+                        [
+                          _vm._v(
+                            _vm._s(_vm.heroHealthMinus) +
+                              " / " +
+                              _vm._s(_vm.heroHealth)
+                          ),
+                        ]
+                      ),
                     ]),
                   ]),
                   _vm._v(" "),
@@ -69650,15 +69682,21 @@ var render = function () {
                       : _vm._e(),
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "col" }, [
+                  _c("div", { staticClass: "col text-center" }, [
                     _c(
                       "div",
                       {
-                        staticClass: "enemyFrame",
+                        staticClass: "enemyFrame text-center",
                         class: [_vm.enemyClassLose, _vm.enemyHit],
                         staticStyle: { "margin-top": "30px" },
                       },
-                      [_c("img", { attrs: { src: _vm.selectedEnemy.sprite } })]
+                      [
+                        _c("span", { staticClass: "text-danger" }, [
+                          _vm._v("-" + _vm._s(_vm.damageHeroToEnemy)),
+                        ]),
+                        _vm._v(" "),
+                        _c("img", { attrs: { src: _vm.selectedEnemy.sprite } }),
+                      ]
                     ),
                   ]),
                 ]),
@@ -69668,10 +69706,14 @@ var render = function () {
                     _c(
                       "div",
                       {
-                        staticClass: "heroFrame",
+                        staticClass: "heroFrame text-center",
                         class: [_vm.heroClassLose, _vm.heroHit],
                       },
                       [
+                        _c("span", { staticClass: "text-danger" }, [
+                          _vm._v("-" + _vm._s(_vm.damageEnemyToHero)),
+                        ]),
+                        _vm._v(" "),
                         _c("img", {
                           attrs: { src: _vm.selectedFighter.sprite },
                         }),
@@ -70010,64 +70052,18 @@ var staticRenderFns = [
       _c(
         "h2",
         { staticClass: "text-center", staticStyle: { "font-size": "20px" } },
-        [_vm._v("Francisco Alfredo Uribe Sanchez - PHP Web Developer")]
+        [_vm._v("Francisco Alfredo Uribe Sanchez - Fullstack Web Developer")]
       ),
       _vm._v(" "),
-      _c("p", [
+      _c("p", { staticClass: "borderTop text-center" }, [
         _vm._v(
-          "\n        I am a PHP Web Developer that loves programming and learn more about other technologies.\n    "
+          "\n        I am Web Developer that loves programming and learn more about other technologies.\n    "
         ),
       ]),
       _vm._v(" "),
-      _c("p", [
+      _c("p", { staticClass: "borderTop text-center" }, [
         _vm._v(
-          "\n        I am used to lead projects from scratch to production deploy guiding teams with agile methodology and acting as a scrum master.\n    "
-        ),
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "fas fa-envelope" }),
-        _vm._v(" Email:"),
-        _c("br"),
-        _c(
-          "a",
-          {
-            attrs: {
-              href: "mailto:alfredo.uribe.sanchez@gmail.com",
-              target: "blank",
-              alt: "Email",
-            },
-          },
-          [_vm._v("alfredo.uribe.sanchez@gmail.com")]
-        ),
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "fas fa-phone" }),
-        _vm._v(" Phone:"),
-        _c("br"),
-        _c("a", { attrs: { href: "tel:+524432373943", alt: "Phone" } }, [
-          _vm._v("+52 44 32 37 39 43"),
-        ]),
-      ]),
-      _vm._v(" "),
-      _c("p", [
-        _c("i", { staticClass: "fas fa-map-pin" }),
-        _vm._v(" Address:"),
-        _c("br"),
-        _c(
-          "a",
-          {
-            attrs: {
-              href: "https://www.google.com/maps/@19.6851089,-101.2196657,3a,75y,145.19h,90t/data=!3m7!1e1!3m5!1s8m4wRJno9sIbDOxHmA1j9w!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3D8m4wRJno9sIbDOxHmA1j9w%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D146.78522%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656",
-              target: "blank",
-            },
-          },
-          [
-            _vm._v(
-              "Sol Edificio E int 101, Cosmos, 58050, Morelia, Michoacan, Mexico."
-            ),
-          ]
+          "\n        I lead projects from scratch to production deploy guiding teams with agile methodology and acting as a scrum master.\n    "
         ),
       ]),
     ])
