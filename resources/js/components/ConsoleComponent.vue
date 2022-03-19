@@ -55,7 +55,7 @@
         },
         methods:{
             processCommand: function(e){
-
+                this.newCommand.command = this.newCommand.command.toLowerCase();
                 const parameters = {
                     command: this.newCommand.command
                 }

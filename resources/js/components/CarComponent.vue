@@ -6,8 +6,6 @@
         :amount=35
         imagePath="images/tetera"
         fileName="tetera_{index}.jpg"
-        :autoplay="35"
-        loop=2
         buttonClass="dark"
         />
   </div>
