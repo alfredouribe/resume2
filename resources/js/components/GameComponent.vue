@@ -2,11 +2,11 @@
     <div class="gameContent" style="padding: 20px">
 
         <div class="row">
-            <div class="col">
-                <canvas class="game-canvas" id="c"></canvas>
+            <div class="col-sm-12 col-md-6">
+                <canvas class="game-canvas" id="c" :value="input"></canvas>
             </div>
 
-            <div class="col" style="background: url(images/maps/backgroundbattle.png); background-size: 100% 100%;" v-if="selectedEnemy.id > 0">
+            <div class="col-sm-12 col-md-6 fightScene" style="background: url(images/maps/backgroundbattle.png); background-size: 100% 100%;" v-if="selectedEnemy.id > 0">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col"></div>
@@ -151,6 +151,24 @@
             preload
             id="randomEnemy"
         ></audio>
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" ref="modalButton" style="display: none">
+        
+        </button>
+        <div class="modal" tabindex="-1" id="modalLogin" ref="my-modal">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <video width="100%" autoplay id="hitVideo">
+                        <source src="/videos/quetvstona.mp4" type="video/mp4">
+                        <source src="/videos/quetvstona.mp4" type="video/ogg">
+                        Your browser does not support the video tag.
+                        </video>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="display: none" ref="closeModalButton">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -196,7 +214,9 @@
                 blockHitButton: false,
                 randomEnemySelection: 0,
                 damageHeroToEnemy: "",
-                damageEnemyToHero: ""
+                damageEnemyToHero: "",
+                e: {},
+                input: ""
             }
         },
         mounted(){
@@ -286,7 +306,8 @@
                 this.heroMovement();
             },
             keyDown1(e){
-                let k = event.code
+                // console.log(e);
+                let k = e.code
                 var step = document.getElementById("step");
                 if(step){
                     step.volume = 0.3
@@ -300,7 +321,7 @@
                 }
                 
 
-                if(e.key == "ArrowLeft"){
+                if(e.key == "ArrowLeft" || e.key == "a"){
                     if(this.x-1 > -2){
                         this.x = this.x-1;
                     }else{
@@ -311,7 +332,7 @@
                     // this.heroShowCoorImageY = 32 * 3;
                 }
 
-                if(e.key == "ArrowRight"){
+                if(e.key == "ArrowRight" || e.key == "d"){
                     if(this.x+1 < 17){
                         this.x = this.x+1;
                     }else{
@@ -321,7 +342,7 @@
                     // this.heroShowCoorImageY = 32 * 1;
                 }
 
-                if(e.key == "ArrowUp"){
+                if(e.key == "ArrowUp" || e.key == "w"){
                     if(this.y-1 > -3){
                         this.y = this.y-1;
                     }else{
@@ -331,7 +352,7 @@
                     // this.heroShowCoorImageY = 32 * 2;
                 }
 
-                if(e.key == "ArrowDown"){
+                if(e.key == "ArrowDown" || e.key == "s"){
                     if(this.y+1 <= 7){
                         this.y = this.y+1;
                     }else{
@@ -440,10 +461,14 @@
 
             },
             hitEnemy(){
+                this.$refs.modalButton.click();
                 this.blockHitButton = true
                 var audioPunch = document.getElementById("audioPunch");
                 audioPunch.volume = 0.3
                 audioPunch.play();
+
+                var videoHit = document.getElementById("hitVideo");
+                videoHit.play()
 
                 var heroDeath = document.getElementById("heroDeath");
                 heroDeath.volume = 0.3
@@ -483,7 +508,8 @@
                     this.heroHit = "hittedEnemy";
                     setTimeout(()=>{
                         this.heroHit = "";
-                    }, 100);
+                        this.$refs.closeModalButton.click();
+                    }, 1000);
                     if(this.currentHeroHealth < 0){
                         this.currentHeroHealth = 0
                         this.win = false
@@ -569,7 +595,7 @@
 
 <style scoped>
 .game-canvas{
-    width: 340px;
+    width: 100%;
     height: 192px;
     margin-left: auto;
     margin-right: auto;
@@ -582,6 +608,10 @@
 
 .listInstructions{
     list-style: none;
+}
+
+.fightScene{
+    width: 100%;
 }
 
 
@@ -650,4 +680,13 @@ h1, p{
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+@media screen and (min-width:600px){
+    .game-canvas{
+        width: 370px;
+    }
+}
+
+.modal-dialog{
+    width: 100%;
+}
 </style>

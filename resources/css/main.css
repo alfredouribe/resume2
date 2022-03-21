@@ -184,3 +184,28 @@ a:hover{
       text-align: center;
   }
   /*TECLADO*/
+
+  .simple-keyboard {
+    background-color: rgba(88, 88, 88, 0.8)!important;
+    border-radius: 0;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  
+  .simple-keyboard .hg-button {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5)!important;
+    color: white;
+  }
+  
+  .simple-keyboard .hg-button:active {
+    background: #1c4995;
+    color: black;
+  }
+  
+  #root .simple-keyboard + .simple-keyboard-preview {
+    background: #1c4995;
+  }

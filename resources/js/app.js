@@ -30,6 +30,7 @@ Vue.component('commandscomponent', require('./components/CommandsComponent.vue')
 Vue.component('gamecomponent', require('./components/GameComponent.vue').default);
 Vue.component('fightercomponent', require('./components/FighterComponent.vue').default);
 Vue.component('carcomponent', require('./components/CarComponent.vue').default);
+Vue.component('keyboard2component', require('./components/Keyboard2Component.vue').default);
 
 /** Sweet Alert **/
 // main.js
@@ -48,6 +49,10 @@ import 'vue-360/dist/css/style.css'
 
 Vue.use(VueThreeSixty)
 
+
+//config for keyboard
+Vue.config.productionTip = false;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -62,4 +67,4 @@ const app = new Vue({
             consola: true
         }
     }
-});
+}).$mount("#app");

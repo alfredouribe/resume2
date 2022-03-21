@@ -1,18 +1,21 @@
 <template>
     <div class="commandsConsole">
-        <span class="contentCode">
-            <div v-for="(item, index) in commands" :key="index" style="border-bottom: 1px solid #a9ced0!important;">
-                <p v-for="(item2, index2) in item" :key="index2">
-                    <b><i class="fa-solid fa-angles-right"></i> {{item2.command}}</b>
-                    <br ><small v-html="item2.description">{{item2.description}}</small>
-                    <br ><small v-html="item2.result">{{item2.result}}</small>
-                </p>
-            </div>
-        </span>
+        <div class="consoleSection">
+            <span class="contentCode">
+                <div v-for="(item, index) in commands" :key="index" style="border-bottom: 1px solid #a9ced0!important;">
+                    <p v-for="(item2, index2) in item" :key="index2">
+                        <b><i class="fa-solid fa-angles-right"></i> {{item2.command}}</b>
+                        <br ><small v-html="item2.description">{{item2.description}}</small>
+                        <br ><small v-html="item2.result">{{item2.result}}</small>
+                    </p>
+                </div>
+            </span>
+            
+            <form @submit.prevent="processCommand()">
+                <label class="labelCode">CMDS > </label><input @input="onInputChange" type="text" class="textCommand" v-model="newCommand.command"  style="margin-top:30px; margin-bottom:50px" placeholder="Type command here (try help)">
+            </form>
+        </div>
         
-        <form @submit.prevent="processCommand()">
-            <label class="labelCode">CMDS > </label><input type="text" class="textCommand" v-model="newCommand.command"  style="margin-top:30px; margin-bottom:50px" placeholder="Type command here (try help)">
-        </form>
 
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" ref="modalButton" style="display: none">
         Launch static backdrop modal
@@ -33,6 +36,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-sm-12">
+            <keyboard2component @onChange="onChange" @onKeyPress="onKeyPress" :input="newCommand.command"></keyboard2component>
+        </div>
     </div>
 </template>
 
@@ -46,7 +53,8 @@
                 },
                 lastCommand: "",
                 email: "",
-                password: ""
+                password: "",
+                input: ""
             }
         },
         el2: "modalLogin",
@@ -59,15 +67,20 @@
                 const parameters = {
                     command: this.newCommand.command
                 }
+                this.newCommand.command = this.newCommand.command.split(' ')
 
-                if(this.newCommand.command == "clear"){
+                if(this.newCommand.command[0] == "clear"){
                     this.commands = []
-                }else if(this.newCommand.command == "game"){
+                }else if(this.newCommand.command[0] == "game"){
                     this.$root.consola = false;
-                }else if(this.newCommand.command == "login"){
+                }else if(this.newCommand.command[0] == "login"){
 
                     this.$refs.modalButton.click();
-                }else if(this.newCommand.command == "logout"){
+                    // this.email = this.newCommand.command[1]
+                    // this.password = this.newCommand.command[2]
+                    // this.login()
+
+                }else if(this.newCommand.command[0] == "logout"){
                     document.getElementById('logout-form').submit();
                 
                 }else{
@@ -77,13 +90,14 @@
                     })
                 }
 
-                console.log(this.commands);
-
                 var container = this.$el.querySelector(".contentCode");
                 container.scrollBottom = container.scrollHeight;
                 
                 this.lastCommand = this.newCommand.command;
-                this.newCommand = {};
+                this.newCommand = {
+                    command: ""
+                };
+                this.input = ""
             },
             login: function(){
                 const parameters2 = {
@@ -95,6 +109,19 @@
                 .then(() => {
                     location.reload();
                 })
+            },
+            onChange(input) {
+                this.input = this.newCommand.command
+            },
+            onKeyPress(button) {
+                if(button == "{enter}"){
+                    this.processCommand()
+                    return
+                }
+                this.newCommand.command += button
+            },
+            onInputChange(input) {
+                this.input = input.target.value;
             }
         }
     }
