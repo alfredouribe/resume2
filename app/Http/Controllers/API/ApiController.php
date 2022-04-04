@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 use App\Models\Command;
 
 class ApiController extends Controller
 {
-
     public function get_resources(Request $request){
         $memory = (memory_get_usage(true))/1048576;
 
