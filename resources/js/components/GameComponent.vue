@@ -228,6 +228,9 @@
             var audio = document.getElementById("audio");
             audio.volume = 0.1
             
+            if(window.screen.width<1024){
+                this.startFight = true
+            }
         },
         methods:{
             init(){

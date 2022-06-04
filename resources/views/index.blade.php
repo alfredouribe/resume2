@@ -5,7 +5,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 text-center">
-            <h1 style='font-size:20px; color: #a9ced0' alt="Alfredo Uribe">Alfredo Uribe (A Resume as Never Seen)</h1>
+
+
+            <h1>
+                <a href="#">
+                    <img src="images/alfredo_uribe_logo.png" alt="Alfredo Uribe" width="300px" />
+                </a>
+            </h1>
+
+
+            <h2>(A Resume as Never Seen)</h2>
         </div>
     </div>
     <div class="row">

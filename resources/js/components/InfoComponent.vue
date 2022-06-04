@@ -1,8 +1,9 @@
 <template>
-    <div>
-        <h2 class="text-center">Subject</h2>
-        <img src="images/alfredo-uribe-profile.jpg" class="profilePicture" width="100px" height="100px"  alt="Alfredo Uribe">
-        <h2 style="font-size:20px" class="text-center">Francisco Alfredo Uribe Sanchez - Fullstack Web Developer</h2>
+    <div style="padding-top: 10px" >
+        <img src="images/alfredo-uribe-3.jpg" class="profilePicture" width="100px" height="100px"  alt="Alfredo Uribe">
+        <br>
+        <h2 style="font-size:12px" class="text-center">Francisco Alfredo Uribe Sanchez</h2>
+        <h3 style="font-size:12px" class="text-center">Fullstack Web Developer</h3>
 
         <p class="borderTop text-center">
             I am Web Developer that loves programming and learn more about other technologies.

@@ -14,7 +14,9 @@
     <meta property="og:description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies" />
     <meta property="og:image" content="images/alfredouribe_facebook.png">
 
-    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/x-icon" href="/images/ico.png">
+
+    <meta name="robots" content="index,follow">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
