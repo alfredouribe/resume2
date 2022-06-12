@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-WB7WD3L"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies">
@@ -32,6 +33,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;500&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

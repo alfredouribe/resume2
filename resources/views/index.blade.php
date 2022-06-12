@@ -6,15 +6,10 @@
     <div class="row">
         <div class="col-md-12 text-center">
 
-
-            <h1>
-                <a href="#">
-                    <img src="images/alfredo_uribe_logo.png" alt="Alfredo Uribe" width="300px" />
-                </a>
-            </h1>
+            <h1 style="font-family: 'Montserrat', sans-serif; letter-spacing: 6px; color: white!important; transform: scale(1, 0.9);">ALFREDO URIBE</h1>
 
 
-            <h2>(A Resume as Never Seen)</h2>
+            <h2>(Web Developer)</h2>
         </div>
     </div>
     <div class="row">
@@ -52,7 +47,7 @@
             <div class="borderTop text-center" style="word-wrap: break-word;">
                 <p><i class="fas fa-envelope"></i> Email:<br><a href="mailto:alfredo.uribe.sanchez@gmail.com" target="blank" alt="Email">alfredo.uribe.sanchez@gmail.com</a></p>
                 <p><i class="fas fa-phone"></i> Phone:<br><a href="tel:+524432373943" alt="Phone" >+52 44 32 37 39 43</a></p>
-                <p><i class="fas fa-map-pin"></i> Address:<br><a href="https://www.google.com/maps/@19.6851089,-101.2196657,3a,75y,145.19h,90t/data=!3m7!1e1!3m5!1s8m4wRJno9sIbDOxHmA1j9w!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fpanoid%3D8m4wRJno9sIbDOxHmA1j9w%26cb_client%3Dmaps_sv.tactile.gps%26w%3D203%26h%3D100%26yaw%3D146.78522%26pitch%3D0%26thumbfov%3D100!7i13312!8i6656" target="blank" >Sol Edificio E int 101, Cosmos, 58050, Morelia, Michoacan, Mexico.</a></p>
+                <p><i class="fas fa-map-pin"></i> Address:<br><a href="https://www.google.com/maps/place/Morelia,+Mich./@19.7036417,-101.2761644,12z/data=!3m1!4b1!4m5!3m4!1s0x842d0ba2b29da7e3:0x4016978679c8620!8m2!3d19.7059504!4d-101.1949825" target="blank" >Morelia, Mexico</a></p>
             </div>
 
             <div class="text-center borderTop">
