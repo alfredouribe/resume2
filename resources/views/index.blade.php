@@ -7,9 +7,8 @@
         <div class="col-md-12 text-center">
 
             <h1 style="font-family: 'Montserrat', sans-serif; letter-spacing: 6px; color: white!important; transform: scale(1, 0.9);">ALFREDO URIBE</h1>
+            <h2>Web Developer</h2>
 
-
-            <h2>(Web Developer)</h2>
         </div>
     </div>
     <div class="row">
@@ -50,10 +49,14 @@
                 <p><i class="fas fa-map-pin"></i> Address:<br><a href="https://www.google.com/maps/place/Morelia,+Mich./@19.7036417,-101.2761644,12z/data=!3m1!4b1!4m5!3m4!1s0x842d0ba2b29da7e3:0x4016978679c8620!8m2!3d19.7059504!4d-101.1949825" target="blank" >Morelia, Mexico</a></p>
             </div>
 
-            <div class="text-center borderTop">
+            <!-- <div class="text-center borderTop">
                 <worldcomponent></worldcomponent>
                 <small>this is not real information</small>
-            </div>
+            </div> -->
+
+            <!-- <carcomponent></carcomponent> -->
+            <img src="//rf.revolvermaps.com/h/m/a/5/ff0000/128/0/5rodzt405u9.png" width="100%" height="128" alt="Map" style="border:0;">
+
         </div>
     </div>
 
@@ -61,6 +64,7 @@
 @endsection
 
 @push('scripts')
+
     <script src="{{ asset('chart.js/chart.js') }}"></script>
     <script type="text/javascript">
 

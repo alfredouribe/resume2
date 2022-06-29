@@ -4,15 +4,15 @@
     <script src="https://www.googleoptimize.com/optimize.js?id=OPT-WB7WD3L"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies">
+    <meta name="description" content="Alfredo Uribe Computer Science Professional with 10 years of experience">
     <meta name="author" content="Francisco Alfredo Uribe Sanchez">
-    <meta name="keywords" content="Alfredo Uribe, senior fullstack Developer, fullstack developer roles and responsibilities, web freelancer, developer, coder, laravel developer, cv developer, web senior developer, developer experience resume">
+    <meta name="keywords" content="Alfredo Uribe, senior fullstack Developer, fullstack developer roles and responsibilities, web freelancer, developer, coder, laravel developer, cv developer, web senior developer, developer experience resume, alfredo uribe web developer">
     <meta name="theme-color">
 
     <meta property="og:url" content="https://alfredouribe.com/" />
     <meta property="og:type" content="website" /> 
     <meta property="og:title" content="Alfredo Uribe - Resume Commands Console Version">
-    <meta property="og:description" content="Alfredo Uribe. Computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies" />
+    <meta property="og:description" content="Alfredo Uribe computer Science Professional with 10 years of experience successfully delivering End to End web applications to small, medium and large companies of several business models. Experienced with HTML5, CSS3, jQuery, JavaScript, AJAX, MVC, Bootstrap, Git, MySQL, Angular, TS, Vue and PHP. I am looking forward to digitally transforming organizations with state of the art technologies" />
     <meta property="og:image" content="images/alfredouribe_facebook.png">
 
     <link rel="icon" type="image/x-icon" href="/images/ico.png">
@@ -22,7 +22,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ "Alfredo Uribe" }} (A Resume As Never Seen)</title>
+    <title>{{ "Alfredo Uribe" }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -49,8 +49,21 @@
         gtag('config', 'G-5382F83VZT');
     </script>
 
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-K5SST68');</script>
+    <!-- End Google Tag Manager -->
+
 </head>
 <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5SST68"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
     <!-- Messenger plugin de chat Code -->
     <div id="fb-root"></div>
@@ -79,6 +92,11 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+
+    <video autoplay muted loop id="myVideo">
+        <source src="/videos/alfredo_uribe_background.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
     <div id="app">
         @if (isset(Auth::user()->name) && Auth::user()->name)

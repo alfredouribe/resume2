@@ -2,6 +2,10 @@
     <div class="commandsConsole">
         <div class="consoleSection">
             <span class="contentCode">
+                <div class="">
+                    <p>Welcome to Alfredo Uribe's Resume Console Version<br>
+                    Write help to get all the commands information</p>
+                </div>
                 <div v-for="(item, index) in commands" :key="index" style="border-bottom: 1px solid #a9ced0!important;">
                     <p v-for="(item2, index2) in item" :key="index2">
                         <b><i class="fa-solid fa-angles-right"></i> {{item2.command}}</b>
