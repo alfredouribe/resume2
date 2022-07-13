@@ -2,7 +2,7 @@
     <div style="padding-top: 20px" >
         <img src="images/alfredo-uribe-3.jpg" class="profilePicture" width="100px" height="100px"  alt="Alfredo Uribe">
         <br>
-        <h2 style="font-size:12px; padding-top: 20px" class="text-center">Francisco Alfredo Uribe Sanchez</h2>
+        <h2 style="font-size:12px; padding-top: 20px" class="text-center">Alfredo Uribe</h2>
         <h3 style="font-size:12px;" class="text-center">Fullstack Web Developer</h3>
 
         <div class="row text-center social-list">

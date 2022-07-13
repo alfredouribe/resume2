@@ -25,11 +25,11 @@ Vue.component('consolecomponent', require('./components/ConsoleComponent.vue').d
 Vue.component('clockcomponent', require('./components/ClockComponent.vue').default);
 Vue.component('ipcomponent', require('./components/IpComponent.vue').default);
 Vue.component('keyboardcomponent', require('./components/KeyboardComponent.vue').default);
-Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
+// Vue.component('worldcomponent', require('./components/WorldComponent.vue').default);
 Vue.component('commandscomponent', require('./components/CommandsComponent.vue').default);
 Vue.component('gamecomponent', require('./components/GameComponent.vue').default);
 Vue.component('fightercomponent', require('./components/FighterComponent.vue').default);
-Vue.component('carcomponent', require('./components/CarComponent.vue').default);
+// Vue.component('carcomponent', require('./components/CarComponent.vue').default);
 Vue.component('keyboard2component', require('./components/Keyboard2Component.vue').default);
 
 /** Sweet Alert **/
