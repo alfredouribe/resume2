@@ -93,10 +93,9 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-    <video autoplay muted loop id="myVideo">
+    <!-- <video autoplay muted loop id="myVideo">
         <source src="/videos/alfredo_uribe_background.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    </video> -->
 
     <div id="app">
         @if (isset(Auth::user()->name) && Auth::user()->name)

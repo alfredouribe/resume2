@@ -155,7 +155,7 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalLogin" ref="modalButton" style="display: none">
         
         </button>
-        <div class="modal" tabindex="-1" id="modalLogin" ref="my-modal">
+        <!-- <div class="modal" tabindex="-1" id="modalLogin" ref="my-modal">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-body text-center">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -464,14 +464,14 @@
 
             },
             hitEnemy(){
-                this.$refs.modalButton.click();
+                // this.$refs.modalButton.click();
                 this.blockHitButton = true
                 var audioPunch = document.getElementById("audioPunch");
                 audioPunch.volume = 0.3
                 audioPunch.play();
 
-                var videoHit = document.getElementById("hitVideo");
-                videoHit.play()
+                // var videoHit = document.getElementById("hitVideo");
+                // videoHit.play()
 
                 var heroDeath = document.getElementById("heroDeath");
                 heroDeath.volume = 0.3

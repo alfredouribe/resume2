@@ -55,7 +55,7 @@
             </div> -->
 
             <!-- <carcomponent></carcomponent> -->
-            <img src="//rf.revolvermaps.com/h/m/a/5/ff0000/128/0/5rodzt405u9.png" width="100%" height="128" alt="Map" style="border:0;">
+            <img class="imgWorld" src="//rf.revolvermaps.com/h/m/a/5/ff0000/128/0/5rodzt405u9.png" width="100%" height="128" alt="Map" style="border:0;">
 
         </div>
     </div>
