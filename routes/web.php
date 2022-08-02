@@ -24,3 +24,5 @@ Route::get('/index', [App\Http\Controllers\IndexController::class, 'index'])->na
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/commands', [App\Http\Controllers\CommandController::class, 'index'])->name('commands');
 
+Route::get('/email', [App\Http\Controllers\MailerController::class, 'email'])->name('email');
+Route::post("send-email", [App\Http\Controllers\MailerController::class, "composeEmail"])->name("send-email");
