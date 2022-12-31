@@ -3,20 +3,20 @@
         <div class="consoleSection">
             <span class="contentCode">
                 <div class="">
-                    <p>Welcome to Alfredo Uribe's Resume Console Version<br>
-                    Write help to get all the commands information</p>
+                    <p>Write help to get all the commands information</p>
                 </div>
                 <div v-for="(item, index) in commands" :key="index" style="border-bottom: 1px solid #a9ced0!important;">
                     <p v-for="(item2, index2) in item" :key="index2">
-                        <b><i class="fa-solid fa-angles-right"></i> {{item2.command}}</b>
-                        <br ><small v-html="item2.description">{{item2.description}}</small>
-                        <br ><small v-html="item2.result">{{item2.result}}</small>
+                        <i class="fa-solid fa-angle-right"></i> 
+                        <span style="font-weight: lighter;">{{item2.command}}</span>
+                        <br ><small v-html="item2.description"></small>
+                        <br ><small v-html="item2.result"></small>
                     </p>
                 </div>
             </span>
             
             <form @submit.prevent="processCommand()">
-                <label class="labelCode">CMDS > </label><input @input="onInputChange" type="text" class="textCommand" v-model="newCommand.command"  style="margin-top:30px; margin-bottom:50px" placeholder="Type command here (try help)">
+                <label class="labelCode">CMDS > </label><input @input="onInputChange" autocomplete="off" type="text" class="textCommand" id="textCommand" v-model="newCommand.command"  style="margin-top:30px; margin-bottom:50px" placeholder="Type command here (try help)">
             </form>
         </div>
         
@@ -42,7 +42,7 @@
         </div>
 
         <div class="col-sm-12">
-            <keyboard2component @onChange="onChange" @onKeyPress="onKeyPress" :input="newCommand.command"></keyboard2component>
+            <!-- <keyboard2component @onChange="onChange" @onKeyPress="onKeyPress" :input="newCommand.command"></keyboard2component> -->
         </div>
     </div>
 </template>
@@ -63,7 +63,7 @@
         },
         el2: "modalLogin",
         mounted() {
-            
+            document.getElementById('textCommand').focus()
         },
         methods:{
             processCommand: function(e){
@@ -130,6 +130,7 @@
         }
     }
 </script>
+
 
 <style scoped>
     #modalLogin{

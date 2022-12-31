@@ -39,6 +39,7 @@
     "/songs/sfx_wpn_punch4.wav": "/songs/sfx_wpn_punch4.wav",
     "/songs/song.mp3": "/songs/song.mp3",
     "/images/alfredo-uribe-3.jpg": "/images/alfredo-uribe-3.jpg",
+    "/images/alfredo-uribe-pic.jpg": "/images/alfredo-uribe-pic.jpg",
     "/images/alfredo-uribe-profile.jpf": "/images/alfredo-uribe-profile.jpf",
     "/images/alfredo-uribe-profile.jpg": "/images/alfredo-uribe-profile.jpg",
     "/images/alfredo-uribe-profile.png": "/images/alfredo-uribe-profile.png",
@@ -50,9 +51,5 @@
     "/images/background.jpg": "/images/background.jpg",
     "/images/background.png": "/images/background.png",
     "/images/console-background.png": "/images/console-background.png",
-    "/images/ico.png": "/images/ico.png",
-    "/videos/alfredo_uribe_background.mp4": "/videos/alfredo_uribe_background.mp4",
-    "/videos/background.mp4": "/videos/background.mp4",
-    "/videos/golpe1.mp4": "/videos/golpe1.mp4",
-    "/videos/quetvston.mp4": "/videos/quetvston.mp4"
+    "/images/ico.png": "/images/ico.png"
 }

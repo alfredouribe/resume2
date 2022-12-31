@@ -58,13 +58,16 @@ a:hover{
 }
 
 .textCommand{
-    background-color: rgba(193, 193, 193,0);
+    background-color: transparent;
     border: none;
     color: #c7cfd0;
     font-family: 'Montserrat';
     font-size: 13px;
     width: 70%;
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .textCommand:focus{

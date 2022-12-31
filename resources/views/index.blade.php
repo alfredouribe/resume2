@@ -7,7 +7,7 @@
         <div class="col-md-12 text-center">
 
             <h1 style="font-family: 'Montserrat', sans-serif; letter-spacing: 6px; color: white!important; transform: scale(1, 0.9);">ALFREDO URIBE</h1>
-            <h2>Web Developer</h2>
+            <h2>Web development portfolio and resume of Alfredo Uribe</h2>
 
         </div>
     </div>
@@ -46,7 +46,7 @@
             <div class="borderTop text-center" style="word-wrap: break-word;">
                 <p><i class="fas fa-envelope"></i> Email:<br><a href="mailto:alfredo.uribe.sanchez@gmail.com" target="blank" alt="Email">alfredo.uribe.sanchez@gmail.com</a></p>
                 <p><i class="fas fa-phone"></i> Phone:<br><a href="tel:+524432373943" alt="Phone" >+52 44 32 37 39 43</a></p>
-                <p><i class="fas fa-map-pin"></i> Address:<br><a href="https://www.google.com/maps/place/Morelia,+Mich./@19.7036417,-101.2761644,12z/data=!3m1!4b1!4m5!3m4!1s0x842d0ba2b29da7e3:0x4016978679c8620!8m2!3d19.7059504!4d-101.1949825" target="blank" >Morelia, Mexico</a></p>
+                <!-- <p><i class="fas fa-map-pin"></i> Address:<br><a href="https://www.google.com/maps/place/Morelia,+Mich./@19.7036417,-101.2761644,12z/data=!3m1!4b1!4m5!3m4!1s0x842d0ba2b29da7e3:0x4016978679c8620!8m2!3d19.7059504!4d-101.1949825" target="blank" >Morelia, Mexico</a></p> -->
             </div>
 
             <!-- <div class="text-center borderTop">

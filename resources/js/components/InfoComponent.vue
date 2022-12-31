@@ -1,9 +1,9 @@
 <template>
     <div style="padding-top: 20px" >
-        <img src="images/alfredo-uribe-3.jpg" class="profilePicture" width="100px" height="100px"  alt="Alfredo Uribe">
+        <img src="images/alfredo-uribe-pic.jpg" class="profilePicture" width="100px" height="100px"  alt="Alfredo Uribe">
         <br>
         <h2 style="font-size:12px; padding-top: 20px" class="text-center">Alfredo Uribe</h2>
-        <h3 style="font-size:12px;" class="text-center">Fullstack Web Developer</h3>
+        <h3 style="font-size:12px; color: #c7cfd0" class="text-center">Custom web development solutions for businesses and organizations</h3>
 
         <div class="row text-center social-list">
             <div class="col-3">
