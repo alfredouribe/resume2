@@ -4,8 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Chat;
+use App\Models\answer;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\Command;
+
+use Illuminate\Support\Facades\Auth;
 
 class ApiController extends Controller
 {
@@ -109,5 +114,86 @@ class ApiController extends Controller
         }
 
         echo json_encode($response);
+    }
+
+    public function add_intent(Request $request){
+        $intent = new Chat();
+        $intent->intent = $request->get("intent");
+        $intent->idUser = $request->get("idUser");
+        $intent->save();
+
+        return $intent;
+    }
+
+    public function get_intents(){
+        $chat = Chat::get();
+        return $chat;
+    }
+
+    public function edit_intent(Request $request){
+        $command = Chat::find($request->id);
+
+        $command->intent = $request->intent;
+
+        $command->save();
+
+        return $command;
+    }
+
+    public function delete_intent(Request $request){
+        $command = Chat::find($request->id);
+        $command->delete();
+    }
+
+    public function add_answer(Request $request){
+        $intent = new answer();
+        $intent->idIntent = $request->get("intent");
+        $intent->idUser = $request->get("idUser");
+        $intent->answer = $request->get("answer");
+        $intent->save();
+
+        return $intent;
+    }
+
+    public function get_answers(){
+        $chat = answer::select('answers.*', 'chats.intent')->join('chats', 'chats.id','=','answers.idIntent')->get();
+        return $chat;
+    }
+
+    public function edit_answer(Request $request){
+        $command = answer::find($request->id);
+
+        $command->idIntent = $request->idIntent;
+        $command->answer = $request->answer;
+
+        $command->save();
+
+        return $command;
+    }
+
+    public function delete_answer(Request $request){
+        $command = answer::find($request->id);
+        $command->delete();
+    }
+
+    public function get_answers_front(){
+        $knowledge = DB::
+        table('chats')
+        ->join('answers', 'answers.idIntent', '=', 'chats.id')
+        ->select('chats.intent', 'answers.answer')->get();
+
+        $response = array();
+
+        foreach($knowledge as $item){
+            $elemento = [
+                "question" => $item->intent,
+                "answer" => $item->answer
+            ];
+
+            array_push($response, $elemento);
+        }
+
+
+        return $response;
     }
 }

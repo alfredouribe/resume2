@@ -51,5 +51,7 @@
     "/images/background.jpg": "/images/background.jpg",
     "/images/background.png": "/images/background.png",
     "/images/console-background.png": "/images/console-background.png",
-    "/images/ico.png": "/images/ico.png"
+    "/images/ico.png": "/images/ico.png",
+    "/images/user-profile-icon.webp": "/images/user-profile-icon.webp",
+    "/images/user-profile.png": "/images/user-profile.png"
 }

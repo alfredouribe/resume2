@@ -7,7 +7,7 @@
         <div class="col-md-12 text-center">
 
             <h1 style="font-family: 'Montserrat', sans-serif; letter-spacing: 6px; color: white!important; transform: scale(1, 0.9);">ALFREDO URIBE</h1>
-            <h2>Web development portfolio and resume of Alfredo Uribe</h2>
+            <h2>Web development portfolio and resume</h2>
 
         </div>
     </div>

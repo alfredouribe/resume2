@@ -31,6 +31,9 @@ Vue.component('gamecomponent', require('./components/GameComponent.vue').default
 Vue.component('fightercomponent', require('./components/FighterComponent.vue').default);
 // Vue.component('carcomponent', require('./components/CarComponent.vue').default);
 Vue.component('keyboard2component', require('./components/Keyboard2Component.vue').default);
+Vue.component('chat-component', require('./components/ChatComponent.vue').default);
+Vue.component('chat-config-component', require('./components/ChatConfigComponent.vue').default);
+Vue.component('answer-component', require('./components/AnswerComponent.vue').default);
 
 /** Sweet Alert **/
 // main.js
